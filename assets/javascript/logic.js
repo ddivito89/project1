@@ -66,12 +66,12 @@ $("#submit-keys").on("click", function() {
   getData(index)
 })
 
-database.ref("/").on("value", function(Snapshot) {
+database.ref("/").on("child_added", function(Snapshot) {
 
   var entry = Snapshot.val()
   console.log(entry)
 
-  $("#log-div").append(`
+  $("#log-table").prepend(`
     <tr>
       <td>${entry.restaurant}</td>
     </tr>

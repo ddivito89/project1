@@ -26,7 +26,7 @@ function makeQuestionsContainer() {
 	container.children('div').children('form').append(submitButton);
 	$('body').append(container);
 	$('body').append('<div id="choice-div" class="row"></div>');
-	$('body').append('<div id="log-div" class="row"></div>');
+	$('body').append('<div id="log-div" class="row"></div>').append('<table id="log-table" class="table"></table>');
 }
 makeQuestionsContainer()
 
