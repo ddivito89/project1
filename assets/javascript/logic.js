@@ -1,6 +1,6 @@
 function getData(index) {
   var apiKey = "2d0ccedc51dbe25f162cd3e019b158de";
-  var keyword = $("#keyword-input").val();
+  var keyword = $("#cuisine").val();
   var lat = "41.884653";
   var lon = "-87.627404599";
   var queryURL = "https://developers.zomato.com/api/v2.1/search?q=" + keyword + "&lat=" + lat + "&lon=" + lon +
@@ -37,7 +37,7 @@ function getData(index) {
   });
 }
 
-$("#search-keyword").on("click", function() {
+$("#submit-keys").on("click", function() {
   var index = 0;
   event.preventDefault();
   getData(index)
