@@ -7,6 +7,7 @@ function makeChosenContainer() {
 	container.children('div')
 		.append($('<div>').addClass('col-md-8 info'))
 		.append($('<div>').addClass('col-md-4 map'));
+	container.find('div.info').append($('<img>')).append($('<p>'));
 
 	$('body').append(container);
 }
