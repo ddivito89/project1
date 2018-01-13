@@ -10,6 +10,8 @@ function makeChosenContainer() {
 	container.find('div.info').append($('<img>')).append($('<p>'));
 
 	$('body').append(container);
+
+	restaurantCounter++;
 }
 
 makeChosenContainer();
