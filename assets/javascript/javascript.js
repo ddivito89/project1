@@ -1,24 +1,29 @@
 //Answer questions to narrow down search
 
 var restaurantCounter = 0;	//Counter for each set of html containers
-var questions = ['first', 'second', 'third', 'fourth'];	//store text for input fields
+var questions = ['cuisine', 'rating', 'cost'];	//store text for input fields
 
 function makeQuestionsContainer() {
 	//Create container for questions
 	var container = $('<div>').addClass('container questions').attr('restaurant-number', restaurantCounter);
+	//row to contain header
+	container.append($('<header>').addClass('row'));
+	//Row to contain input fields
+	container.append($('<div>'));
 
 	//Create elements for questions and user inputs
-	var searchQuestions = $('<form>').addClass('form-group');
+	var searchQuestions = $('<form>').addClass('form-horizontal');
 	for (var i = 0; i < questions.length; i++) {
-		var input = $('<input>').attr('question-number', i).attr('type', 'text').attr('placeholder', questions[i]);
+		var input = $('<div>').addClass('form-group').append($('<input>').attr('question-number', i).attr('type', 'text').attr('placeholder', questions[i]));
 		searchQuestions.append(input);
 	}
 
 	//Create submission element button
-	var submitButton = $('<input>').addClass('btn btn-primary').attr('type', 'submit');
+	var submitButton = $('<div>').addClass('form-group').append($('<input>').addClass('btn btn-primary').attr('type', 'submit'));
 
 	//Put elements together
-	container.append(searchQuestions).append(submitButton);
+	container.children('div').append(searchQuestions);
+	container.children('div').children('form').append(submitButton);
 	$('body').append(container);
 }
 
