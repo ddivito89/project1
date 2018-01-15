@@ -22,35 +22,72 @@ function getData(index) {
   console.log(queryURL)
 
   $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
-    console.log(response)
+
+    var results = []
+
+    for (var x=0; x<response.restaurants.length; x++){
+      var result = {
+        'x': x,
+        'name': response.restaurants[x].restaurant.name,
+        'address': response.restaurants[x].restaurant.location.address,
+        'cuisines': response.restaurants[x].restaurant.cuisines,
+        'latitude': response.restaurants[x].restaurant.location.latitude,
+        'longitude': response.restaurants[x].restaurant.location.longitude
+      }
+      results.push(result)
+    }
+
+    var Choice = function(id, name, address, cuisines, latitude, longitude) {
+      this.createChoice = function() {
+        var newChoice = $(`<div class='col-md-4'></div>`);
+        newChoice.append(`<p>${name}</p>`)
+        newChoice.append(`<p>${address}</p>`)
+        newChoice.append(`<p>${cuisines}</p>`)
+        newChoice.append(`<p>${latitude}</p>`)
+        newChoice.append(`<p>${longitude}</p>`)
+        newChoice.append(`<button class="addRestaurant" name="${name}" id="${id}">Select</button>`)
+        return newChoice;
+      }
+    }
 
     function showOptions(index) {
 
       $("#choice-div").empty()
+
       for (var x = index; x < index + 3; x++) {
-        var name = response.restaurants[x].restaurant.name
-        var address = response.restaurants[x].restaurant.location.address
-        var cuisines = response.restaurants[x].restaurant.cuisines
-        var restLat = response.restaurants[x].restaurant.location.latitude
-        var restLon = response.restaurants[x].restaurant.location.longitude
 
-        var newOptions = $("<div class='col-md-4'></div>")
+        var result = {
+          'index': results[x].x,
+          'name': results[x].name,
+          'address': results[x].address,
+          'cuisines': results[x].cuisines,
+          'latitude': results[x].latitude,
+          'longitude': results[x].longitude
+        }
 
-        newOptions.append(`<p>${name}</p>`)
-        newOptions.append(`<p>${address}</p>`)
-        newOptions.append(`<p>${cuisines}</p>`)
-        newOptions.append(`<p>${restLat}</p>`)
-        newOptions.append(`<p>${restLon}</p>`)
-        newOptions.append(`<button class="addRestaurant" name="${name}">Select</button>`)
+        var newOptions = new Choice(result.index, result.name, result.address, result.cuisines, result.latitude, result.longitude).createChoice()
 
         $("#choice-div").append(newOptions)
       }
+
       //add select button actions
       $(".addRestaurant").on("click", function() {
         event.preventDefault();
 
-        var name = $(this).attr("name")
-        database.ref("/").push({restaurant: name});
+        var index = $(this).attr("id")
+        var name = results[index].name
+        var address = results[index].address
+        var cuisines = results[index].name
+        var latitude = results[index].latitude
+        var longitude = results[index].longitude
+
+        database.ref("/restaurants").push(
+          {name: name,
+            address:address,
+            cuisines: cuisines,
+            latitude: latitude,
+            longitude: longitude,
+          });
 
         $("#choice-div").empty()
       });
@@ -66,14 +103,15 @@ $("#submit-keys").on("click", function() {
   getData(index)
 })
 
-database.ref("/").on("child_added", function(Snapshot) {
+database.ref("/restaurants").on("child_added", function(Snapshot) {
 
   var entry = Snapshot.val()
-  console.log(entry)
 
   $("#log-table").prepend(`
     <tr>
-      <td>${entry.restaurant}</td>
+      <td>${entry.name}</td>
+      <td>${entry.latitude}</td>
+      <td>${entry.longitude}</td>
     </tr>
   `)
 });
