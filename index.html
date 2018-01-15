@@ -15,7 +15,7 @@
 	<title>Document</title>
 </head>
 <body>
-	<header class="page-header">
+	<header class="jumbotron">
 		<h1>This is our project</h1>
 		<small>There are many like it but this one is ours</small>
 	</header>
@@ -25,10 +25,13 @@
 	<header class='row'></header>
 	<form class='form-horizontal'>
 		<div class='form-group'>
-			<input id='cuisine' type='text' placeholder='cuisine'>
+			<input id='cuisine' type='text' placeholder='Cuisine'>
 		</div>
 		<div class='form-group'>
-			<input id='rating' type='text' placeholder='rating'>
+			<input id='rating' type='text' placeholder='Rating'>
+		</div>
+		<div class='form-group'>
+			<input id='city' type='text' placeholder='City'>
 		</div>
 	<div class='form-group'>
 			<input id='submit-keys' class='btn btn-primary' type='submit' placeholder='rating'>
@@ -39,7 +42,7 @@
 <!-- Display results of search -->
 <div class='container results'>
 	<!-- Show restaurant info -->
-	<div class='row'>
+	<div class='row' id="restaurantList">
 		<div class='col-md-4 choice-1'>
 			<img src="http://www.tasteinsf.com/public/images/default-restaurant-thumbnail-250x244.png">
 			<h4 class='distance result-display-text'>text</h4>
@@ -65,6 +68,10 @@
 </div>
 
 </body>
+
 <script src="assets/javascript/layout.js"></script>
 <script src="assets/javascript/logic.js"></script>
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8eHV_yIjBd1ybGPr4cEVJC4YkL3yP7Sk&callback=initMap">
+</script>
 </html>

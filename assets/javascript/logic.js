@@ -1,8 +1,47 @@
-function getData(index) {
+var userLongitude;
+var userLatitude;
+var map, infoWindow;
+var map, infoWindow;
+      
+function initMap() {
+  
+  infoWindow = new google.maps.InfoWindow;
+
+        // Try HTML5 geolocation.
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+         lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+
+      userLongitude = position.coords.longitude;
+      userLatitude =  position.coords.latitude;
+      getUserCityName();
+       
+    }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+  } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+     }
+
+}
+
+function getUserCityName(){
+    var m_apiKey = "AIzaSyCkAdpuaUbF88OegKKWanqZaEDmKhD_CL4";
+    var m_queryURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+userLatitude+"," + userLongitude + "&key=" + m_apiKey 
+    $.ajax({url: m_queryURL, method: 'GET'}).done(function(response) {
+        $("#city").val(response.results[3].formatted_address);
+    });
+}
+
+function getData(index,long,lati) {
   var apiKey = "2d0ccedc51dbe25f162cd3e019b158de";
   var keyword = $("#cuisine").val();
-  var lat = "41.884653";
-  var lon = "-87.627404599";
+  var lat = lati;
+  var lon = long;
   var queryURL = "https://developers.zomato.com/api/v2.1/search?q=" + keyword + "&lat=" + lat + "&lon=" + lon +
   "&sort=real_distance&order=desc%20Response%20Body" + "&apikey=" + apiKey;
 
@@ -13,24 +52,28 @@ function getData(index) {
 
     function showOptions(index) {
 
-      $("#test-div").empty()
-      for (var x = index; x < index + 3; x++) {
+      $("#restaurantList").empty()
+      for (var x = index; x < index + 9 ; x++) {
         var name = response.restaurants[x].restaurant.name
         var address = response.restaurants[x].restaurant.location.address
         var cuisines = response.restaurants[x].restaurant.cuisines
         var restLat = response.restaurants[x].restaurant.location.latitude
         var restLon = response.restaurants[x].restaurant.location.longitude
 
-        var newOptions = $("<div class='col-md-4'></div>")
+        
+        var newOptions = $("<div class='col-md-4 panel panel-primary'>")
+        var newOptions1 = $("<div class='panel-heading'>") 
+        newOptions1.append("<h3 class='panel-title'>" + name +"</h3>")
+        newOptions.append(newOptions1)
+        var newOptions2 = $("<div class='panel-body'>") 
+        newOptions2.append(`<p>${address}</p>`)
+        newOptions2.append(`<p>${cuisines}</p>`)
+        newOptions2.append(`<p>${restLat}</p>`)
+        newOptions2.append(`<p>${restLon}</p>`)
+        newOptions2.append(`<button>Select</button>`)
+        newOptions.append(newOptions2)
 
-        newOptions.append(`<p>${name}</p>`)
-        newOptions.append(`<p>${address}</p>`)
-        newOptions.append(`<p>${cuisines}</p>`)
-        newOptions.append(`<p>${restLat}</p>`)
-        newOptions.append(`<p>${restLon}</p>`)
-        newOptions.append(`<button>Select</button>`)
-
-        $("#test-div").append(newOptions)
+        $("#restaurantList").append(newOptions)
       }
     }
     showOptions(index)
@@ -40,5 +83,6 @@ function getData(index) {
 $("#submit-keys").on("click", function() {
   var index = 0;
   event.preventDefault();
-  getData(index)
+  getData(index, userLongitude, userLatitude)
 })
+
