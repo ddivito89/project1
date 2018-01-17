@@ -1,59 +1,75 @@
 var restaurantCounter = 0;	//Counter for each set of html containers
+var numResults = 3; //How many results should be displayed from the search
+var defaultImage = "http://www.tasteinsf.com/public/images/default-restaurant-thumbnail-250x244.png"; //If no thumbnail display this image instead
+
+//Display results of search
+function makeResultsBox() {
+	//Create box
+	var box = $('<div>').addClass('wrapper results');
+
+	//Picture
+	for (var i = 0; i < numResults; i++) {
+		box.append($('<img src='+ defaultImage +'>'))
+	}
+	//Distance to restaurant
+	for (var i = 0; i < numResults; i++) {
+		box.append($('<h4>').addClass('distance choice'+ i +' result-display-text'))
+	}
+	//Cost
+	for (var i = 0; i < numResults; i++) {
+		box.append($('<h4>').addClass('cost choice'+ i +' result-display-text'))
+	}
+	//Rating
+	for (var i = 0; i < numResults; i++) {
+		box.append($('<h4>').addClass('rating choice'+ i +' result-display-text'))
+	}
+	//Button to choose this one
+	for (var i = 0; i < numResults; i++) {
+		box.append($('<button>').addClass('btn btn-success choice'+ i +'').attr('type', 'submit').text('Choose'))
+	}
+
+	$('body').append(box);
+}
 
 //Restaurant Choice Container Builder
-function makeChosenContainer() {
-	var container = $('<div>').addClass('container').attr('choice-number', restaurantCounter);
-	container.append($('<div>').addClass('row'));
-	container.children('div')
-		.append($('<div>').addClass('col-md-8 info'))
-		.append($('<div>').addClass('col-md-4 map'));
-	container.find('div.info').append($('<img>')).append($('<p>'));
+function makeChosenBox() {
+	//Create box
+	var box = $('<div>').addClass('wrapper chosen-restaurant').attr('choice-number', restaurantCounter);
+	//Add content elements
+	box
+		.append($('<div>').addClass('info'))
+		.append($('<div>').addClass('map'));
+	box.find('div.info').append($('<img>')).append($('<p>'));
 
-	$('body').append(container);
+	$('body').append(box);
 
 	restaurantCounter++;
 }
 
-makeChosenContainer();
+//Restaurant user review container builder
+function makeReviewBox() {
+	var container = $('<div>').addClass('container review-restaurant').attr('choice-number', restaurantCounter);
+	container.append($('<div>').addClass('row'));
+	//add content elements
+	container.children('div')
+		.append($('<div>').addClass('info'))
+		.append($('<div>').addClass('map'));
+
+	$('body').append(container);
+}
 
 //Display details of the chosen restaurant
-//Enter review info of restaurant
-	//Rating 1-10
-	//Text box to enter comments
+function makeChosenBox() {
+	var box = $('<div>').addClass('wrapper chosen-restaurant').attr('choice-number', restaurantCounter);
+	//add content elements
+	box
+		.append($('<div>').addClass('info'))
+		.append($('<div>').addClass('map'));
 
+	$('body').append(box);
 
+	restaurantCounter++;
+}
 
-
-
-
-
-
-
-
-
-
-//Don't need this code, but keeping it for copy paste
-	// function makeQuestionsContainer() {
-	// 	//Create container for questions
-	// 	var container = $('<div>').addClass('container questions').attr('restaurant-number', restaurantCounter);
-	// 	//row to contain header
-	// 	container.append($('<header>').addClass('row'));
-	// 	//Row to contain input fields
-	// 	container.append($('<div>'));
-
-	// 	//Create elements for questions and user inputs
-	// 	var searchQuestions = $('<form>').addClass('form-horizontal');
-	// 	for (var i = 0; i < questions.length; i++) {
-	// 		var input = $('<div>').addClass('form-group').append($('<input>').attr('id', questions[i]).attr('type', 'text').attr('placeholder', questions[i]));
-	// 		searchQuestions.append(input);
-	// 	}
-
-	// 	//Create submission element button
-	// 	var submitButton = $('<div>').addClass('form-group').append($('<input>').addClass('btn btn-primary').attr('type', 'submit').attr('id', 'submit-keys'));
-
-	// 	//Put elements together
-	// 	container.children('div').append(searchQuestions);
-	// 	container.children('div').children('form').append(submitButton);
-	// 	$('body').append(container);
-	// 	$('body').append('<div id="test-div" class="row"></div>');
-	// }
+makeResultsBox();
+makeChosenBox();

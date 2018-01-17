@@ -11,6 +11,7 @@
 
 		<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
 
+		<link rel="stylesheet" href="assets/css/style.css">
 
 	<title>Document</title>
 </head>
@@ -21,48 +22,22 @@
 	</header>
 
 <!-- Input fields for searching restaurants -->
-<div class='container questions'>
-	<header class='row'></header>
-	<form class='form-horizontal'>
+<!-- <div class='wrapper questions'> -->
+	<form class='wrapper questions form-horizontal'>
 		<div class='form-group'>
 			<input id='cuisine' type='text' placeholder='cuisine'>
 		</div>
 		<div class='form-group'>
 			<input id='rating' type='text' placeholder='rating'>
 		</div>
-	<div class='form-group'>
+		<div class='form-group'>
 			<input id='submit-keys' class='btn btn-primary' type='submit' placeholder='rating'>
 		</div>
 	</form>
-</div>
+<!-- </div> -->
 
 <!-- Display results of search -->
-<div class='container results'>
-	<!-- Show restaurant info -->
-	<div class='row'>
-		<div class='col-md-4 choice-1'>
-			<img src="http://www.tasteinsf.com/public/images/default-restaurant-thumbnail-250x244.png">
-			<h4 class='distance result-display-text'>text</h4>
-			<h4 class='cost result-display-text'>more text</h4>
-			<h4 class='rating result-display-text'>even more text</h4>
-			<button class='btn btn-success' type='submit'>Choose</button>
-		</div>
-		<div class='col-md-4 choice-2'>
-			<img src="http://www.tasteinsf.com/public/images/default-restaurant-thumbnail-250x244.png">
-			<h4 class='distance result-display-text'>text</h4>
-			<h4 class='cost result-display-text'>more text</h4>
-			<h4 class='rating result-display-text'>even more text</h4>
-			<button class='btn btn-success' type='submit'>Choose</button>
-		</div>
-		<div class='col-md-4 choice-3'>
-			<img src="http://www.tasteinsf.com/public/images/default-restaurant-thumbnail-250x244.png">
-			<h4 class='distance result-display-text'>text</h4>
-			<h4 class='cost result-display-text'>more text</h4>
-			<h4 class='rating result-display-text'>even more text</h4>
-			<button class='btn btn-success' type='submit'>Choose</button>
-		</div>
-	</div>
-</div>
+	<!-- from javascript -->
 
 </body>
 <script src="assets/javascript/layout.js"></script>
