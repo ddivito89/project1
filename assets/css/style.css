@@ -4,8 +4,12 @@
 }
 
 .wrapper.questions {
-	grid-template-columns: auto;
-	grid-template-rows: 30px 30px 30px;
+	grid-template-columns: 300px 300px 300px;
+	grid-template-rows: 50px;
+}
+#submit-keys {
+	grid-column-start: 2;
+	grid-column-end: 3;
 }
 
 .wrapper.results {
@@ -20,10 +24,9 @@
 
 .wrapper.chosen-restaurant {
 	display: grid;
-	grid-template-columns: 570px 570px; /*Total should be 1140px*/
+	grid-template-columns: 570px 570px;
 	grid-template-rows: 100px 100px 100px;
 }
-
 .info {
 	background-color: green;
 	grid-row-start: 1;
@@ -38,4 +41,18 @@
 
 .menu {
 	background-color: orange;
+}
+
+.wrapper.review-restaurant {
+	grid-template-columns: 570px 570px;
+	grid-template-rows: 30px 80px;
+}
+.review-date {
+	background-color: black;
+}
+.review-rating {
+	background-color: grey;
+}
+.review-comments {
+	background-color: purple;
 }

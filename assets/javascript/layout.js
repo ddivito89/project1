@@ -9,23 +9,23 @@ function makeResultsBox() {
 
 	//Picture
 	for (var i = 0; i < numResults; i++) {
-		box.append($('<img src='+ defaultImage +'>'))
+		box.append($('<img class="option-'+ (i+1) +'" src='+ defaultImage +'>'))
 	}
 	//Distance to restaurant
 	for (var i = 0; i < numResults; i++) {
-		box.append($('<h4>').addClass('distance choice'+ i +' result-display-text'))
+		box.append($('<h4>').addClass('distance option-'+ (i+1) +' result-display-text'))
 	}
 	//Cost
 	for (var i = 0; i < numResults; i++) {
-		box.append($('<h4>').addClass('cost choice'+ i +' result-display-text'))
+		box.append($('<h4>').addClass('cost option-'+ (i+1) +' result-display-text'))
 	}
 	//Rating
 	for (var i = 0; i < numResults; i++) {
-		box.append($('<h4>').addClass('rating choice'+ i +' result-display-text'))
+		box.append($('<h4>').addClass('rating option-'+ (i+1) +' result-display-text'))
 	}
 	//Button to choose this one
 	for (var i = 0; i < numResults; i++) {
-		box.append($('<button>').addClass('btn btn-success choice'+ i +'').attr('type', 'submit').text('Choose'))
+		box.append($('<button>').addClass('btn btn-success option-'+ (i+1) +'').attr('type', 'submit').text('Choose'))
 	}
 
 	$('body').append(box);
@@ -37,39 +37,38 @@ function makeChosenBox() {
 	var box = $('<div>').addClass('wrapper chosen-restaurant').attr('choice-number', restaurantCounter);
 	//Add content elements
 	box
+		.append($('<img>'))
 		.append($('<div>').addClass('info'))
-		.append($('<div>').addClass('map'));
-	box.find('div.info').append($('<img>')).append($('<p>'));
+		.append($('<div>').addClass('map'))
+		.append($('<button>')
+			.addClass('btn btn-info write-review')
+			.attr('choice-number', restaurantCounter)
+			.text('Review'));
 
 	$('body').append(box);
 
 	restaurantCounter++;
 }
+
 
 //Restaurant user review container builder
-function makeReviewBox() {
-	var container = $('<div>').addClass('container review-restaurant').attr('choice-number', restaurantCounter);
-	container.append($('<div>').addClass('row'));
-	//add content elements
-	container.children('div')
-		.append($('<div>').addClass('info'))
-		.append($('<div>').addClass('map'));
-
-	$('body').append(container);
-}
-
-//Display details of the chosen restaurant
-function makeChosenBox() {
-	var box = $('<div>').addClass('wrapper chosen-restaurant').attr('choice-number', restaurantCounter);
+function makeReviewBox(whichChoice) {
+	var box = $('<div>').addClass('wrapper review-restaurant').attr('choice-number', restaurantCounter);
 	//add content elements
 	box
-		.append($('<div>').addClass('info'))
-		.append($('<div>').addClass('map'));
+		.append($('<h4>').addClass('review-date'))//Date review written
+		.append($('<h4>').addClass('review-rating'))//User rating
+		.append($('<div>').addClass('review-comments'));//Field to enter comments
 
-	$('body').append(box);
-
-	restaurantCounter++;
+	box.insertAfter($('.chosen-restaurant[choice-number='+ whichChoice +']'));
 }
+
+//Click event for adding a review
+$('body').on('click', '.btn.write-review',function() {
+	console.log('got here');
+	var whichChoice = $(this).attr('choice-number');
+	makeReviewBox(whichChoice);
+});
 
 makeResultsBox();
 makeChosenBox();
