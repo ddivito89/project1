@@ -1,0 +1,58 @@
+.wrapper {
+	display: grid;
+	margin-left: calc(50% - 570px);
+}
+
+.wrapper.questions {
+	grid-template-columns: 300px 300px 300px;
+	grid-template-rows: 50px;
+}
+#submit-keys {
+	grid-column-start: 2;
+	grid-column-end: 3;
+}
+
+.wrapper.results {
+	grid-template-columns: 300px 300px 300px;
+	grid-template-rows: 250px 20px 20px 20px 60px;
+}
+.result-display-text {
+	background-color: teal;
+	height: 20px;
+	outline: solid 2px grey;
+}
+
+.wrapper.chosen-restaurant {
+	display: grid;
+	grid-template-columns: 570px 570px;
+	grid-template-rows: 100px 100px 100px;
+}
+.info {
+	background-color: green;
+	grid-row-start: 1;
+	grid-row-end: 4;
+}
+
+.map {
+	background-color: blue;
+	grid-row-start: 1;
+	grid-row-end: 3;
+}
+
+.menu {
+	background-color: orange;
+}
+
+.wrapper.review-restaurant {
+	grid-template-columns: 570px 570px;
+	grid-template-rows: 30px 80px;
+}
+.review-date {
+	background-color: black;
+}
+.review-rating {
+	background-color: grey;
+}
+.review-comments {
+	background-color: purple;
+}
