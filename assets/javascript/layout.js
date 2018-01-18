@@ -46,7 +46,7 @@ function makeChosenBox() {
 			.text('Review'));
 
 	$('body').append(box);
-
+	
 	restaurantCounter++;
 }
 
