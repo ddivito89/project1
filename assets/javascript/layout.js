@@ -1,59 +1,74 @@
 var restaurantCounter = 0;	//Counter for each set of html containers
+var numResults = 3; //How many results should be displayed from the search
+var defaultImage = "http://www.tasteinsf.com/public/images/default-restaurant-thumbnail-250x244.png"; //If no thumbnail display this image instead
+
+//Display results of search
+function makeResultsBox() {
+	//Create box
+	var box = $('<div>').addClass('wrapper results');
+
+	//Picture
+	for (var i = 0; i < numResults; i++) {
+		box.append($('<img class="option-'+ (i+1) +'" src='+ defaultImage +'>'))
+	}
+	//Distance to restaurant
+	for (var i = 0; i < numResults; i++) {
+		box.append($('<h4>').addClass('distance option-'+ (i+1) +' result-display-text'))
+	}
+	//Cost
+	for (var i = 0; i < numResults; i++) {
+		box.append($('<h4>').addClass('cost option-'+ (i+1) +' result-display-text'))
+	}
+	//Rating
+	for (var i = 0; i < numResults; i++) {
+		box.append($('<h4>').addClass('rating option-'+ (i+1) +' result-display-text'))
+	}
+	//Button to choose this one
+	for (var i = 0; i < numResults; i++) {
+		box.append($('<button>').addClass('btn btn-success option-'+ (i+1) +'').attr('type', 'submit').text('Choose'))
+	}
+
+	$('body').append(box);
+}
 
 //Restaurant Choice Container Builder
-function makeChosenContainer() {
-	var container = $('<div>').addClass('container').attr('choice-number', restaurantCounter);
-	container.append($('<div>').addClass('row'));
-	container.children('div')
-		.append($('<div>').addClass('col-md-8 info'))
-		.append($('<div>').addClass('col-md-4 map'));
-	container.find('div.info').append($('<img>')).append($('<p>'));
+function makeChosenBox() {
+	//Create box
+	var box = $('<div>').addClass('wrapper chosen-restaurant').attr('choice-number', restaurantCounter);
+	//Add content elements
+	box
+		.append($('<img>'))
+		.append($('<div>').addClass('info'))
+		.append($('<div>').addClass('map'))
+		.append($('<button>')
+			.addClass('btn btn-info write-review')
+			.attr('choice-number', restaurantCounter)
+			.text('Review'));
 
-	$('body').append(container);
-
+	$('body').append(box);
+	
 	restaurantCounter++;
 }
 
-makeChosenContainer();
 
-//Display details of the chosen restaurant
-//Enter review info of restaurant
-	//Rating 1-10
-	//Text box to enter comments
+//Restaurant user review container builder
+function makeReviewBox(whichChoice) {
+	var box = $('<div>').addClass('wrapper review-restaurant').attr('choice-number', restaurantCounter);
+	//add content elements
+	box
+		.append($('<h4>').addClass('review-date'))//Date review written
+		.append($('<h4>').addClass('review-rating'))//User rating
+		.append($('<div>').addClass('review-comments'));//Field to enter comments
 
+	box.insertAfter($('.chosen-restaurant[choice-number='+ whichChoice +']'));
+}
 
+//Click event for adding a review
+$('body').on('click', '.btn.write-review',function() {
+	console.log('got here');
+	var whichChoice = $(this).attr('choice-number');
+	makeReviewBox(whichChoice);
+});
 
-
-
-
-
-
-
-
-
-
-//Don't need this code, but keeping it for copy paste
-	// function makeQuestionsContainer() {
-	// 	//Create container for questions
-	// 	var container = $('<div>').addClass('container questions').attr('restaurant-number', restaurantCounter);
-	// 	//row to contain header
-	// 	container.append($('<header>').addClass('row'));
-	// 	//Row to contain input fields
-	// 	container.append($('<div>'));
-
-	// 	//Create elements for questions and user inputs
-	// 	var searchQuestions = $('<form>').addClass('form-horizontal');
-	// 	for (var i = 0; i < questions.length; i++) {
-	// 		var input = $('<div>').addClass('form-group').append($('<input>').attr('id', questions[i]).attr('type', 'text').attr('placeholder', questions[i]));
-	// 		searchQuestions.append(input);
-	// 	}
-
-	// 	//Create submission element button
-	// 	var submitButton = $('<div>').addClass('form-group').append($('<input>').addClass('btn btn-primary').attr('type', 'submit').attr('id', 'submit-keys'));
-
-	// 	//Put elements together
-	// 	container.children('div').append(searchQuestions);
-	// 	container.children('div').children('form').append(submitButton);
-	// 	$('body').append(container);
-	// 	$('body').append('<div id="test-div" class="row"></div>');
-	// }
+makeResultsBox();
+makeChosenBox();
