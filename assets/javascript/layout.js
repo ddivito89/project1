@@ -70,5 +70,5 @@ $('body').on('click', '.btn.write-review',function() {
 	makeReviewBox(whichChoice);
 });
 
-makeResultsBox();
-makeChosenBox();
+// makeResultsBox();
+// makeChosenBox();
