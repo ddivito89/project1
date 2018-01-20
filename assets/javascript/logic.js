@@ -12,11 +12,11 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 //pull data from Zomato
-function getData(index,long,lati) {
+function getData(index) {
   var apiKey = "2d0ccedc51dbe25f162cd3e019b158de";
   var keyword = $("#cuisine").val();
-  var lat = lati;
-  var lon = long;
+  var lat = userLatitude;
+  var lon = userLongitude;
   var queryURL = "https://developers.zomato.com/api/v2.1/search?q=" + keyword + "&lat=" + lat + "&lon=" + lon +
   "&sort=real_distance&order=desc%20Response%20Body" + "&apikey=" + apiKey;
 
@@ -25,7 +25,11 @@ function getData(index,long,lati) {
   $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 
     var results = []
-
+    
+    console.log(response);
+    var rd = getDistance(response.restaurants[0].restaurant.location.latitude, response.restaurants[0].restaurant.location.longitude);
+    console.log(rd);
+    
     for (var x=0; x<response.restaurants.length; x++){
       var result = {
         'x': x,
@@ -101,7 +105,7 @@ function getData(index,long,lati) {
 $("#submit-keys").on("click", function() {
   var index = 0;
   event.preventDefault();
-  getData(index, userLongitude, userLatitude)
+  getLatLong(index);
 })
 
 database.ref("/restaurants").on("child_added", function(Snapshot) {
