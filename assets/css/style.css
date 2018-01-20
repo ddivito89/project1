@@ -1,0 +1,14 @@
+.results {
+	margin-top: 20px;
+}
+.results img {
+	float: left;
+	width: 160px;
+}
+.results>div>div {
+	padding-top: 50px;
+}
+
+.review h4 {
+	display: inline-block;
+}
