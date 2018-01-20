@@ -110,8 +110,6 @@
 	</div>
 </div>
 
-<!-- Enter user-specific review info -->
-
 <!-- Display user review -->
 <div class="container review">
 	<div class="row headers">
@@ -172,8 +170,48 @@
 		</ul>
 	</div>
 </div>
-	
+
+<!-- Enter user-specific review info -->
+<div class='container input-review'>
+	<div class="dropdown">
+		<!-- Dropdown button and toggle -->
+		<button class="btn btn-info btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+		Add Review
+		<span class="caret"></span>
+		</button>
+		<!-- Input fields -->
+		<form class='form-inline dropdown-menu'>
+			<!-- Rating -->
+			<div class='form-group'>
+				<label for="input-rating">Rating: # / 7</label><br>
+				<input id='input-rating' type='text' placeholder='#'>
+			</div>
+			<!-- Date of review -->
+			<div class='form-group'>
+				<label for="input-date">Date</label><br>
+				<input id='input-date' type='text' placeholder='mm/dd/yyyy'>
+			</div>
+			<!-- 3 short descriptions -->
+			<div class='form-group'>
+				<label for="input-date">Description 1</label><br>
+				<input id='input-description-1' type='text' placeholder='description'>
+			</div>
+			<div class='form-group'>
+				<label for="input-date">2</label><br>
+				<input id='input-description-2' type='text' placeholder='description'>
+			</div>
+			<div class='form-group'>
+				<label for="input-date">3</label><br>
+				<input id='input-description-3' type='text' placeholder='description'>
+			</div>
+			<div class='form-group'>
+				<input id='submit-review' class='btn btn-primary' type='submit'>
+			</div>
+		</form>
+
+	</div>
 </div>
+
 
 </body>
 
