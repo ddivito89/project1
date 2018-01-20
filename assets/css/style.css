@@ -12,3 +12,6 @@
 .review h4 {
 	display: inline-block;
 }
+.review li {
+	padding: 5px 15px;
+}
