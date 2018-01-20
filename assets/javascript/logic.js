@@ -49,7 +49,6 @@ function getData(index, long, lati) {
     //choice constructor
     var Choice = function(id, name, address, locality, cuisines, latitude, longitude, rating, thumbnail, average_cost_for_two, menu_link, zomato_link) {
       this.createChoice = function() {
-        console.log("test")
         if (thumbnail===""){
           thumbnail ='assets/images/fork.png'
         }
@@ -71,7 +70,9 @@ function getData(index, long, lati) {
 
       $("#choice-div").empty()
 
-      for (var x = index; x < index + 3; x++) {
+      var maxIndex = Math.min(index+3, results.length)
+
+      for (var x= index; x < maxIndex; x++) {
 
         var result = {
           'index': results[x].x,
@@ -87,6 +88,11 @@ function getData(index, long, lati) {
 
         $("#choice-div").append(newOptions)
       }
+
+      if (index+3 < results.length){
+        $("#choice-div").append(`<button startIndex="${x}" class="more-options">Next Options</button>`)
+      }
+
 
       //add select button actions
       $(".addRestaurant").on("click", function() {
@@ -118,6 +124,11 @@ function getData(index, long, lati) {
           'menu_link': menu_link,
           'zomato_link': zomato_link});
         $("#choice-div").empty()
+      });
+
+      $(".more-options").on("click", function() {
+        var nextIndex = parseInt($(this).attr("startIndex"))
+        showOptions(nextIndex)
       });
     }
     showOptions(index)
