@@ -42,8 +42,8 @@
 
 <!-- Display results of search so user can choose between 3 options -->
 <div class="container results">
-	<div class="row">
-		<div class="col-md-4">
+	<div class="row"  id="choice-div">
+		<!-- <div class="col-md-4">
 			<img src='assets/images/fork.png'>
 			<div class="result-text">
 				<h4>Name</h4>
@@ -66,20 +66,20 @@
 				<h4>Rating</h4>
 				<h4>Distance</h4>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </div>
 
+<!-- Container for holding all restaurant info -->
+<div class="container restaurant-block" id="choice-log">
 <!-- Display info of chosen restaurant -->
-<div class="container chosen">
 	<!-- Name -->
-	<div class="row">
+	<div class="row heading">
 		<div class="col-md-12">
 			<h3>Chicago Pizza &amp; Oven Grinder Company</h3>
 		</div>
 	</div>
-
-	<div class="row">
+	<div class="row information">
 		<div class="col-md-6">
 			<div class="row">
 				<!-- Thumbnail -->
@@ -108,52 +108,95 @@
 			</div>
 		</div>
 	</div>
-</div>
 
-<!-- Enter user-specific review info -->
+	<!-- Display user review -->
+		<div class="row review">
+			<ul class="list-group">
+				<li class="list-group-item list-group-item-warning">
+					<div class="row">
+						<!-- rating -->
+						<h4 class="col-md-2">5/7</h4>
+						<!-- Descriptions -->
+						<div class="col-md-9">
+							<h4>Eatable</h4>
+							<h4>Crispy</h4>
+							<h4>Poison</h4>
+						</div>
+						<!-- date of review -->
+						<h4 class="col-md-1 badge">1/12/2018</h4>
+					</div>
+				</li>
+				<li class="list-group-item list-group-item-danger">
+					<div class="row">
+						<!-- rating -->
+						<h4 class="col-md-2">2/7</h4>
+						<!-- Descriptions -->
+						<div class="col-md-9">
+							<h4>Eatable</h4>
+							<h4>Crispy</h4>
+							<h4>Poison</h4>
+						</div>
+						<!-- date of review -->
+						<h4 class="col-md-1 badge">1/12/2018</h4>
+					</div>
+				</li>
+				<li class="list-group-item list-group-item-success">
+					<div class="row">
+						<!-- rating -->
+						<h4 class="col-md-2">6/7</h4>
+						<!-- Descriptions -->
+						<div class="col-md-9">
+							<h4>Eatable</h4>
+							<h4>Crispy</h4>
+							<h4>Poison</h4>
+						</div>
+						<!-- date of review -->
+						<h4 class="col-md-1 badge">1/12/2018</h4>
+					</div>
+				</li>
+			</ul>
+		</div>
 
-<!-- Display user review -->
-<div class="container review">
-	<div class="row headers">
-		<div class="col-md-2">
-			<h3>Rating</h3>
-		</div>
-		<div class="col-md-3">
-			<h3>Visited On</h3>
-		</div>
-		<div class="col-md-7">
-			<h3>Description</h3>
-		</div>
-	</div>
-
-	<div class="row review">
-		<ul class="list-group">
-			<li></li>
-			<!-- rating -->
-			<h4 class="col-md-2">5/7</h4>
-			<!-- date of review -->
-			<h4 class="col-md-3">1/12/2018</h4>
-			<!-- Descriptions -->
-			<div class="col-md-7">
-				<h4>Eatable</h4>
-				<h4>Crispy</h4>
-				<h4>Poison</h4>
+	<!-- Enter user-specific review info -->
+	<div class="dropdown input-review">
+		<!-- Dropdown button and toggle -->
+		<button class="btn btn-info btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+		Add Review
+		<span class="caret"></span>
+		</button>
+		<!-- Input fields -->
+		<form class='form-inline dropdown-menu'>
+			<!-- Rating -->
+			<div class='form-group'>
+				<label for="input-rating">Rating: # / 7</label><br>
+				<input id='input-rating' type='text' placeholder='#'>
 			</div>
-		</ul>
-		<!-- <div class="col-md-2">
-			<h4>5/7</h4>
-		</div>
-		<div class="col-md-3">
-			<h4>1/12/2018</h4>
-		</div>
-		<div class="col-md-7">
-			<h4>Eatable</h4>
-			<h4>Crispy</h4>
-			<h4>Poison</h4> -->
-		</div>
+			<!-- Date of review -->
+			<div class='form-group'>
+				<label for="input-date">Date</label><br>
+				<input id='input-date' type='text' placeholder='mm/dd/yyyy'>
+			</div>
+			<!-- 3 short descriptions -->
+			<div class='form-group'>
+				<label for="input-date">Description 1</label><br>
+				<input id='input-description-1' type='text' placeholder='description' maxlength='14'>
+			</div>
+			<div class='form-group'>
+				<label for="input-date">2</label><br>
+				<input id='input-description-2' type='text' placeholder='description' maxlength='14'>
+			</div>
+			<div class='form-group'>
+				<label for="input-date">3</label><br>
+				<input id='input-description-3' type='text' placeholder='description' maxlength='14'>
+			</div>
+			<div class='form-group'>
+				<input id='submit-review' class='btn btn-primary' type='submit'>
+			</div>
+		</form>
 	</div>
-	
 </div>
+
+
 
 </body>
 
@@ -162,4 +205,3 @@
 <script src="assets/javascript/googlemapsapi.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8eHV_yIjBd1ybGPr4cEVJC4YkL3yP7Sk&callback=initMap"></script>
 </html>
-
