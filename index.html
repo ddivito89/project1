@@ -3,14 +3,16 @@
 <head>
 	<meta charset="UTF-8">
 	<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 	<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<!-- Latest compiled JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="assets/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
 		<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
 
+	<!-- Custom CSS -->
+		<link rel="stylesheet" href="assets/css/style.css">
 
 	<title>Document</title>
 </head>
@@ -22,8 +24,7 @@
 
 <!-- Input fields for searching restaurants -->
 <div class='container questions'>
-	<header class='row'></header>
-	<form class='form-horizontal'>
+	<form class='form-inline'>
 		<div class='form-group'>
 			<input id='cuisine' type='text' placeholder='Cuisine'>
 		</div>
@@ -34,21 +35,173 @@
 			<input id='city' type='text' placeholder='City'>
 		</div>
 	<div class='form-group'>
-			<input id='submit-keys' class='btn btn-primary' type='submit' placeholder='rating'>
+			<input id='submit-keys' class='btn btn-primary' type='submit'>
 		</div>
 	</form>
 </div>
 
-<!-- Display results of search -->
-<!-- Changed to javascript code -->
+<!-- Display results of search so user can choose between 3 options -->
+<div class="container results">
+	<div class="row"  id="choice-div">
+		<!-- <div class="col-md-4">
+			<img src='assets/images/fork.png'>
+			<div class="result-text">
+				<h4>Name</h4>
+				<h4>Rating</h4>
+				<h4>Distance</h4>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<img src='assets/images/fork.png'>
+			<div class="result-text">
+				<h4>Name</h4>
+				<h4>Rating</h4>
+				<h4>Distance</h4>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<img src='assets/images/fork.png' alt="restaurant picture">
+			<div class="result-text">
+				<h4>Name</h4>
+				<h4>Rating</h4>
+				<h4>Distance</h4>
+			</div>
+		</div> -->
+	</div>
+</div>
+
+<!-- Container for holding all restaurant info -->
+<div class="container restaurant-block" id="choice-log">
+<!-- Display info of chosen restaurant -->
+	<!-- Name -->
+	<div class="row heading">
+		<div class="col-md-12">
+			<h3>Chicago Pizza &amp; Oven Grinder Company</h3>
+		</div>
+	</div>
+	<div class="row information">
+		<div class="col-md-6">
+			<div class="row">
+				<!-- Thumbnail -->
+				<div class="col-md-6 chosen-thumbnail">
+					<img src="https://b.zmtcdn.com/data/res_imagery/16733182_RESTAURANT_2317de0909b99bd03f8d4d94cbd3389d_c.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A" alt="restaurant picture">
+				</div>
+				<!-- Text info -->
+				<div class="col-md-6 chosen-info">
+					<h4>cuisines: Italian, Pizza, Sandwich</h4>
+					<h4>average_cost_for_two: $65</h4>
+					<a href='https://www.zomato.com/chicago/chicago-pizza-oven-grinder-company-lincoln-park/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop'>Menu</a>
+					<a href="https://www.zomato.com/chicago/chicago-pizza-oven-grinder-company-lincoln-park?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1" target='_blank'>Link</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Map -->
+		<div class="col-md-6">
+			<div class="col-md-6 chosen-map">
+				<img src="assets/images/map-of-middle-earth-small.png" alt="map">
+			</div>
+			<div class="col-md-6 chosen-address">
+				<p class="address">2121 N Clark Street 60614</p>
+				<p class="city">Chicago</p>
+				<p class="locality">Lincoln Park</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Display user review -->
+		<div class="row review">
+			<ul class="list-group">
+				<li class="list-group-item list-group-item-warning">
+					<div class="row">
+						<!-- rating -->
+						<h4 class="col-md-2">5/7</h4>
+						<!-- Descriptions -->
+						<div class="col-md-9">
+							<h4>Eatable</h4>
+							<h4>Crispy</h4>
+							<h4>Poison</h4>
+						</div>
+						<!-- date of review -->
+						<h4 class="col-md-1 badge">1/12/2018</h4>
+					</div>
+				</li>
+				<li class="list-group-item list-group-item-danger">
+					<div class="row">
+						<!-- rating -->
+						<h4 class="col-md-2">2/7</h4>
+						<!-- Descriptions -->
+						<div class="col-md-9">
+							<h4>Eatable</h4>
+							<h4>Crispy</h4>
+							<h4>Poison</h4>
+						</div>
+						<!-- date of review -->
+						<h4 class="col-md-1 badge">1/12/2018</h4>
+					</div>
+				</li>
+				<li class="list-group-item list-group-item-success">
+					<div class="row">
+						<!-- rating -->
+						<h4 class="col-md-2">6/7</h4>
+						<!-- Descriptions -->
+						<div class="col-md-9">
+							<h4>Eatable</h4>
+							<h4>Crispy</h4>
+							<h4>Poison</h4>
+						</div>
+						<!-- date of review -->
+						<h4 class="col-md-1 badge">1/12/2018</h4>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+	<!-- Enter user-specific review info -->
+	<div class="dropdown input-review">
+		<!-- Dropdown button and toggle -->
+		<button class="btn btn-info btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+		Add Review
+		<span class="caret"></span>
+		</button>
+		<!-- Input fields -->
+		<form class='form-inline dropdown-menu'>
+			<!-- Rating -->
+			<div class='form-group'>
+				<label for="input-rating">Rating: # / 7</label><br>
+				<input id='input-rating' type='text' placeholder='#'>
+			</div>
+			<!-- Date of review -->
+			<div class='form-group'>
+				<label for="input-date">Date</label><br>
+				<input id='input-date' type='text' placeholder='mm/dd/yyyy'>
+			</div>
+			<!-- 3 short descriptions -->
+			<div class='form-group'>
+				<label for="input-date">Description 1</label><br>
+				<input id='input-description-1' type='text' placeholder='description' maxlength='14'>
+			</div>
+			<div class='form-group'>
+				<label for="input-date">2</label><br>
+				<input id='input-description-2' type='text' placeholder='description' maxlength='14'>
+			</div>
+			<div class='form-group'>
+				<label for="input-date">3</label><br>
+				<input id='input-description-3' type='text' placeholder='description' maxlength='14'>
+			</div>
+			<div class='form-group'>
+				<input id='submit-review' class='btn btn-primary' type='submit'>
+			</div>
+		</form>
+	</div>
+</div>
+
+
 
 </body>
 
 <script src="assets/javascript/layout.js"></script>
 <script src="assets/javascript/logic.js"></script>
 <script src="assets/javascript/googlemapsapi.js"></script>
-<script
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8eHV_yIjBd1ybGPr4cEVJC4YkL3yP7Sk&callback=initMap">
-</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8eHV_yIjBd1ybGPr4cEVJC4YkL3yP7Sk&callback=initMap"></script>
 </html>
-

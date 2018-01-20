@@ -46,7 +46,7 @@ function makeChosenBox() {
 			.text('Review'));
 
 	$('body').append(box);
-	
+
 	restaurantCounter++;
 }
 
@@ -70,5 +70,5 @@ $('body').on('click', '.btn.write-review',function() {
 	makeReviewBox(whichChoice);
 });
 
-makeResultsBox();
-makeChosenBox();
+// makeResultsBox();
+// makeChosenBox();

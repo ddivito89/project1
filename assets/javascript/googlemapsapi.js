@@ -19,7 +19,9 @@ function initMap() {
       };
       userLongitude = position.coords.longitude;
       userLatitude =  position.coords.latitude;
-      getUserCityName(); 
+
+      getUserCityName();
+
     }, function() {
             // hardcoding user's location to Evanston if user does not allow to disclose their location
             handleLocationError(true, infoWindow);
@@ -40,9 +42,12 @@ function handleLocationError(browserHasGeolocation, infoWindow) {
     'Error: Your browser doesn\'t support geolocation.');
 }
 
+
 // function to get user's city name from user's latitutde and longitude from initial page load 
 function getUserCityName(){  
     var m_queryURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+userLatitude+"," + userLongitude + "&key=" + m_apiKey 
+
+    
       $.ajax({url: m_queryURL, method: 'GET'}).done(function(response) {
           $("#city").val(response.results[3].formatted_address);
       });
@@ -51,8 +56,10 @@ function getUserCityName(){
 // function to calculate distance and time from user's location to restaurant
 function getDistance(resLat,resLong,disID,durationID){
     var m_queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" + userLatitude + "," + userLongitude + "&destinations=" + resLat + "," + resLong + "&key=" + m_apiKey;
+
     
   $.when($.ajax({url: m_queryURL, method: 'GET' })).done(function(response) {  
+
     $("#" + disID).text(response.rows[0].elements["0"].distance.text);
     $("#" + durationID).text(response.rows[0].elements["0"].duration.text);
   });
