@@ -26,10 +26,6 @@ function getData(index) {
 
     var results = []
     
-    console.log(response);
-    var rd = getDistance(response.restaurants[0].restaurant.location.latitude, response.restaurants[0].restaurant.location.longitude);
-    console.log(rd);
-    
     for (var x=0; x<response.restaurants.length; x++){
       var result = {
         'x': x,
