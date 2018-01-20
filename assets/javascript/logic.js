@@ -17,7 +17,10 @@ function getData(index) {
   var keyword = $("#cuisine").val();
   var lat = userLatitude;
   var lon = userLongitude;
-  var queryURL = "https://developers.zomato.com/api/v2.1/search?q=" + keyword + "&lat=" + lat + "&lon=" + lon + "&sort=real_distance&order=desc%20Response%20Body" + "&apikey=" + apiKey;
+
+  var queryURL = "https://developers.zomato.com/api/v2.1/search?q=" + keyword + "&lat=" + lat + "&lon=" + lon +
+  "&sort=real_distance&order=desc%20Response%20Body" + "&apikey=" + apiKey;
+
 
   console.log(queryURL)
 
@@ -25,12 +28,14 @@ function getData(index) {
 
     var results = []
 
+
     console.log(response);
     var rd = getDistance(response.restaurants[0].restaurant.location.latitude, response.restaurants[0].restaurant.location.longitude);
     console.log(rd);
 
     //populate reuslts into an array
     for (var x = 0; x < response.restaurants.length; x++) {
+
       var result = {
         'x': x,
         'name': response.restaurants[x].restaurant.name,
