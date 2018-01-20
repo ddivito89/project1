@@ -12,13 +12,11 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 //pull data from Zomato
-function getData(index, long, lati) {
+function getData(index) {
   var apiKey = "2d0ccedc51dbe25f162cd3e019b158de";
   var keyword = $("#cuisine").val();
-  var lat = '41.8846530';
-  //lati;
-  var lon = '-87.6274050';
-  //long;
+  var lat = userLatitude;
+  var lon = userLongitude;
   var queryURL = "https://developers.zomato.com/api/v2.1/search?q=" + keyword + "&lat=" + lat + "&lon=" + lon + "&sort=real_distance&order=desc%20Response%20Body" + "&apikey=" + apiKey;
 
   console.log(queryURL)
@@ -26,6 +24,10 @@ function getData(index, long, lati) {
   $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 
     var results = []
+
+    console.log(response);
+    var rd = getDistance(response.restaurants[0].restaurant.location.latitude, response.restaurants[0].restaurant.location.longitude);
+    console.log(rd);
 
     //populate reuslts into an array
     for (var x = 0; x < response.restaurants.length; x++) {
@@ -89,9 +91,12 @@ function getData(index, long, lati) {
         $("#choice-div").append(newOptions)
       }
 
-      if (index+3 < results.length){
-        $("#choice-div").append(`<button startIndex="${x}" class="more-options">Next Options</button>`)
+
+      if (index + 3 < results.length){
+        $("#choice-div").append(`<button startIndex="${x}" class="next-options">Next Options</button>`)
       }
+
+
 
 
       //add select button actions
@@ -126,10 +131,12 @@ function getData(index, long, lati) {
         $("#choice-div").empty()
       });
 
-      $(".more-options").on("click", function() {
+
+      $(".next-options").on("click", function() {
         var nextIndex = parseInt($(this).attr("startIndex"))
         showOptions(nextIndex)
       });
+
     }
     showOptions(index)
   });
@@ -139,7 +146,7 @@ function getData(index, long, lati) {
 $("#submit-keys").on("click", function() {
   var index = 0;
   event.preventDefault();
-  getData(index, userLongitude, userLatitude)
+  getLatLong(index);
 })
 
 
