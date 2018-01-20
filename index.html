@@ -71,7 +71,9 @@
 </div>
 
 <!-- Container for holding all restaurant info -->
+
 <div class="container restaurant-block" id="choice-log">
+
 <!-- Display info of chosen restaurant -->
 	<!-- Name -->
 	<div class="row heading">
@@ -126,68 +128,45 @@
 						<h4 class="col-md-1 badge">1/12/2018</h4>
 					</div>
 				</li>
-				<li class="list-group-item list-group-item-danger">
-					<div class="row">
-						<!-- rating -->
-						<h4 class="col-md-2">2/7</h4>
-						<!-- Descriptions -->
-						<div class="col-md-9">
-							<h4>Eatable</h4>
-							<h4>Crispy</h4>
-							<h4>Poison</h4>
-						</div>
-						<!-- date of review -->
-						<h4 class="col-md-1 badge">1/12/2018</h4>
-					</div>
-				</li>
-				<li class="list-group-item list-group-item-success">
-					<div class="row">
-						<!-- rating -->
-						<h4 class="col-md-2">6/7</h4>
-						<!-- Descriptions -->
-						<div class="col-md-9">
-							<h4>Eatable</h4>
-							<h4>Crispy</h4>
-							<h4>Poison</h4>
-						</div>
-						<!-- date of review -->
-						<h4 class="col-md-1 badge">1/12/2018</h4>
-					</div>
-				</li>
 			</ul>
 		</div>
 
 	<!-- Enter user-specific review info -->
 	<div class="dropdown input-review">
 		<!-- Dropdown button and toggle -->
+
 		<button class="btn btn-info btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+
 		Add Review
 		<span class="caret"></span>
 		</button>
 		<!-- Input fields -->
-		<form class='form-inline dropdown-menu'>
+
+		<form class='form-inline dropdown-menu' onsubmit='addReview(this)'>
 			<!-- Rating -->
 			<div class='form-group'>
-				<label for="input-rating">Rating: # / 7</label><br>
-				<input id='input-rating' type='text' placeholder='#'>
+				<label for="input-rating">Rating</label><br>
+				<input id='input-rating' type='text' name='rating' required pattern='[1-7]' placeholder='1 - 7'>
 			</div>
 			<!-- Date of review -->
 			<div class='form-group'>
 				<label for="input-date">Date</label><br>
-				<input id='input-date' type='text' placeholder='mm/dd/yyyy'>
+
+				<input id='input-date' type='date' name='date' required placeholder='mm/dd/yyyy'>
 			</div>
 			<!-- 3 short descriptions -->
 			<div class='form-group'>
 				<label for="input-date">Description 1</label><br>
-				<input id='input-description-1' type='text' placeholder='description' maxlength='14'>
+
+				<input id='input-description-1' type='text' name='description1' required placeholder='description' maxlength='14'>
 			</div>
 			<div class='form-group'>
 				<label for="input-date">2</label><br>
-				<input id='input-description-2' type='text' placeholder='description' maxlength='14'>
+				<input id='input-description-2' type='text' name='description2' placeholder='description' maxlength='14'>
 			</div>
 			<div class='form-group'>
 				<label for="input-date">3</label><br>
-				<input id='input-description-3' type='text' placeholder='description' maxlength='14'>
+				<input id='input-description-3' type='text' name='description3' placeholder='description' maxlength='14'>
 			</div>
 			<div class='form-group'>
 				<input id='submit-review' class='btn btn-primary' type='submit'>
@@ -203,5 +182,6 @@
 <script src="assets/javascript/layout.js"></script>
 <script src="assets/javascript/logic.js"></script>
 <script src="assets/javascript/googlemapsapi.js"></script>
+<script src="assets/javascript/addReview.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8eHV_yIjBd1ybGPr4cEVJC4YkL3yP7Sk&callback=initMap"></script>
 </html>
