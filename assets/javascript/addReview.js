@@ -1,13 +1,27 @@
 function addReview(form) {
 	event.preventDefault();
 
-	var rating = form.rating.value;
-	var date = form.date.value;
-	var description1 = form.description1.value;
-	var description2 = form.description2.value;
-	var description3 = form.description3.value;
+	//Get input values
+	var rating 			= form.rating.value;
+	var date 			= form.date.value;
+	var description1 	= form.description1.value;
+	var description2 	= form.description2.value;
+	var description3 	= form.description3.value;
 
+	//Clear onput fields
+	$("#input-rating").val("");
+	$("#input-date").val("");
+	$("#input-description-1").val("");
+	$("#input-description-2").val("");
+	$("#input-description-3").val("");
+
+	//Close input form
+	// $('#sumit-review').dropdown("toggle");
+	$('.input-review').removeClass('open');
+
+	//Create element
 	var newReview = $("<li>").addClass('list-group-item');
+	//Apply styling based on rating
 	if (rating / 7 > .66) {
 		newReview.addClass('list-group-item-success');
 	}
@@ -18,6 +32,7 @@ function addReview(form) {
 		newReview.addClass('list-group-item-danger');
 	}
 	
+	//Generate html structure
 	newReview.html(`
 		<div class="row">
 			<!-- rating -->
@@ -33,6 +48,7 @@ function addReview(form) {
 		</div>
 	`);
 
+	//Add to window
 	$('.restaurant-block').find('ul').prepend(newReview);
 ;
 }
