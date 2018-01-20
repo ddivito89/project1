@@ -42,8 +42,8 @@
 
 <!-- Display results of search so user can choose between 3 options -->
 <div class="container results">
-	<div class="row">
-		<div class="col-md-4">
+	<div class="row"  id="choice-div">
+		<!-- <div class="col-md-4">
 			<img src='assets/images/fork.png'>
 			<div class="result-text">
 				<h4>Name</h4>
@@ -66,12 +66,14 @@
 				<h4>Rating</h4>
 				<h4>Distance</h4>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </div>
 
 <!-- Container for holding all restaurant info -->
-<div class="container restaurant-block">
+
+<div class="container restaurant-block" id="choice-log">
+
 <!-- Display info of chosen restaurant -->
 	<!-- Name -->
 	<div class="row heading">
@@ -132,11 +134,14 @@
 	<!-- Enter user-specific review info -->
 	<div class="dropdown input-review">
 		<!-- Dropdown button and toggle -->
-		<button class="btn btn-info btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+
+		<button class="btn btn-info btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+
 		Add Review
 		<span class="caret"></span>
 		</button>
 		<!-- Input fields -->
+
 		<form class='form-inline dropdown-menu' onsubmit='addReview(this)'>
 			<!-- Rating -->
 			<div class='form-group'>
@@ -146,11 +151,13 @@
 			<!-- Date of review -->
 			<div class='form-group'>
 				<label for="input-date">Date</label><br>
+
 				<input id='input-date' type='date' name='date' required placeholder='mm/dd/yyyy'>
 			</div>
 			<!-- 3 short descriptions -->
 			<div class='form-group'>
 				<label for="input-date">Description 1</label><br>
+
 				<input id='input-description-1' type='text' name='description1' required placeholder='description' maxlength='14'>
 			</div>
 			<div class='form-group'>
@@ -178,4 +185,3 @@
 <script src="assets/javascript/addReview.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8eHV_yIjBd1ybGPr4cEVJC4YkL3yP7Sk&callback=initMap"></script>
 </html>
-
