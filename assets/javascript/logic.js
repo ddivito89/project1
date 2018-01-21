@@ -173,9 +173,9 @@ database.ref("/restaurants").on("child_added", function(Snapshot) {
           </div>
           <!-- Text info -->
           <div class="col-md-6 chosen-info">
-            <h4>cuisines: ${entry.cuisines}</h4>
-            <h4>average_cost_for_two: ${entry.average_cost_for_two}</h4>
-            <a href=${entry.menu_link}>Menu</a>
+            <h4>Cuisines: ${entry.cuisines}</h4>
+            <h4>Average cost for two: $${entry.average_cost_for_two}</h4>
+            <a href=${entry.menu_link}>Menu</a><br>
             <a href=${entry.zomato_link} target='_blank'>Link</a>
           </div>
         </div>
