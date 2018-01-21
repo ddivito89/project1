@@ -28,11 +28,6 @@ function getData(index) {
 
     var results = []
 
-
-    console.log(response);
-    var rd = getDistance(response.restaurants[0].restaurant.location.latitude, response.restaurants[0].restaurant.location.longitude);
-    console.log(rd);
-
     //populate reuslts into an array
     for (var x = 0; x < response.restaurants.length; x++) {
 
@@ -64,12 +59,14 @@ function getData(index) {
           <div class="result-text">
             <h4>${name}</h4>
             <h4>${rating}</h4>
-            <h4>distance</h4>
+            <h4 id="choice-dist-${id}"></h4>
+            <h4 id="choice-dur-${id}"></h4>
           </div>
           <button class="addRestaurant" name="${name}" id="${id}">Select</button>
         </div>`)
         return newChoice;
       }
+      getDistance(latitude, longitude, `choice-dist-${id}`, `choice-dur-${id}`)
     }
 
     //populate choices to choice div
@@ -112,7 +109,7 @@ function getData(index) {
         var name = results[index].name
         var address = results[index].address
         var locality = results[index].locality
-        var cuisines = results[index].name
+        var cuisines = results[index].cuisines
         var latitude = results[index].latitude
         var longitude = results[index].longitude
         var rating = results[index].rating
@@ -160,9 +157,10 @@ $("#submit-keys").on("click", function() {
 database.ref("/restaurants").on("child_added", function(Snapshot) {
 
   var entry = Snapshot.val()
+  var key = Snapshot.getRef().key
 
   $("#choice-log").prepend(`
-    <div class="row heading">
+    <div class="row heading" id="${key}">
       <div class="col-md-12">
         <h3>${entry.name}</h3>
       </div>
@@ -186,8 +184,7 @@ database.ref("/restaurants").on("child_added", function(Snapshot) {
 
       <!-- Map -->
       <div class="col-md-6">
-        <div class="col-md-6 chosen-map">
-          <img src="assets/images/map-of-middle-earth-small.png" alt="map">
+        <div class="col-md-6 chosen-map" id="map${key}">
         </div>
         <div class="col-md-6 chosen-address">
           <p class="address">${entry.address}</p>
@@ -195,5 +192,60 @@ database.ref("/restaurants").on("child_added", function(Snapshot) {
         </div>
       </div>
     </div>
+
+    <!-- Display user review -->
+  		<div class="row review">
+  			<ul class="list-group">
+  				<li class="list-group-item list-group-item-warning">
+
+  				</li>
+  			</ul>
+  		</div>
+
+  	<!-- Enter user-specific review info -->
+  	<div class="dropdown input-review">
+  		<!-- Dropdown button and toggle -->
+
+  		<button class="btn btn-info btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+
+  		Add Review
+  		<span class="caret"></span>
+  		</button>
+  		<!-- Input fields -->
+
+  		<form class='form-inline dropdown-menu' onsubmit='addReview(this)'>
+  			<!-- Rating -->
+  			<div class='form-group'>
+  				<label for="input-rating">Rating</label><br>
+  				<input id='input-rating' type='text' name='rating' required pattern='[1-7]' placeholder='1 - 7'>
+  			</div>
+  			<!-- Date of review -->
+  			<div class='form-group'>
+  				<label for="input-date">Date</label><br>
+
+  				<input id='input-date' type='date' name='date' required placeholder='mm/dd/yyyy'>
+  			</div>
+  			<!-- 3 short descriptions -->
+  			<div class='form-group'>
+  				<label for="input-date">Description 1</label><br>
+
+  				<input id='input-description-1' type='text' name='description1' required placeholder='description' maxlength='14'>
+  			</div>
+  			<div class='form-group'>
+  				<label for="input-date">2</label><br>
+  				<input id='input-description-2' type='text' name='description2' placeholder='description' maxlength='14'>
+  			</div>
+  			<div class='form-group'>
+  				<label for="input-date">3</label><br>
+  				<input id='input-description-3' type='text' name='description3' placeholder='description' maxlength='14'>
+  			</div>
+  			<div class='form-group'>
+  				<input id='submit-review' class='btn btn-primary' type='submit'>
+  			</div>
+  		</form>
+  	</div>
+  </div>
+
   `)
+  displayMap(entry.latitude,entry.latitude,`map${key}`)
 });

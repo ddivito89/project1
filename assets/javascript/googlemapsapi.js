@@ -43,11 +43,11 @@ function handleLocationError(browserHasGeolocation, infoWindow) {
 }
 
 
-// function to get user's city name from user's latitutde and longitude from initial page load 
-function getUserCityName(){  
-    var m_queryURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+userLatitude+"," + userLongitude + "&key=" + m_apiKey 
+// function to get user's city name from user's latitutde and longitude from initial page load
+function getUserCityName(){
+    var m_queryURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+userLatitude+"," + userLongitude + "&key=" + m_apiKey
 
-    
+
       $.ajax({url: m_queryURL, method: 'GET'}).done(function(response) {
           $("#city").val(response.results[3].formatted_address);
       });
@@ -57,17 +57,23 @@ function getUserCityName(){
 function getDistance(resLat,resLong,disID,durationID){
     var m_queryURL = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" + userLatitude + "," + userLongitude + "&destinations=" + resLat + "," + resLong + "&key=" + m_apiKey;
 
-    
-  $.when($.ajax({url: m_queryURL, method: 'GET' })).done(function(response) {  
 
-    $("#" + disID).text(response.rows[0].elements["0"].distance.text);
-    $("#" + durationID).text(response.rows[0].elements["0"].duration.text);
+  $.when($.ajax({url: m_queryURL, method: 'GET' })).done(function(response) {
+
+    var distance = (response.rows[0].elements["0"].distance.text);
+    var duration = (response.rows[0].elements["0"].duration.text);
+
+    $("#" + disID).text(`${distance} away`);
+    $("#" + durationID).text(`${duration} away`);
   });
+
+
 }
 
 // function to display location of restaurant on the map
 function displayMap(resLat,resLong,pId){
    $("#"+pId).append("<iframe width='250' height='250' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/view?zoom=18&center=" + resLat + "," + resLong + "&key=" + apiKey_displayMap + "' allowfullscreen></iframe>");
+   console.log("<iframe width='250' height='250' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/view?zoom=18&center=" + resLat + "," + resLong + "&key=" + apiKey_displayMap + "' allowfullscreen></iframe>")
 }
 
 // function to get Latitude and Longitude for user's location
