@@ -14,7 +14,7 @@ var database = firebase.database();
 //pull data from Zomato
 function getData(index) {
   var apiKey = "2d0ccedc51dbe25f162cd3e019b158de";
-  var keyword = $("#cuisine").val();
+  var keyword = $("#cuisine").val().replace(/\s+/g, '%20').toLowerCase();
   var lat = userLatitude;
   var lon = userLongitude;
 
@@ -49,24 +49,24 @@ function getData(index) {
     }
 
     //choice constructor
-    var Choice = function(id, name, address, locality, cuisines, latitude, longitude, rating, thumbnail, average_cost_for_two, menu_link, zomato_link) {
+    var Choice = function(result) {
       this.createChoice = function() {
-        if (thumbnail===""){
-          thumbnail ='assets/images/fork.png'
+        if (result.thumbnail===""){
+          result.thumbnail ='assets/images/fork.png'
         }
         var newChoice = (`
-        <div class = "col-md-4 addRestaurant" > <img src="${thumbnail}">
+        <div class = "col-md-4 addRestaurant" > <img src="${result.thumbnail}">
           <div class="result-text">
-            <h4>${name}</h4>
-            <h4>${rating}</h4>
-            <h4 id="choice-dist-${id}"></h4>
-            <h4 id="choice-dur-${id}"></h4>
+            <h4>${result.name}</h4>
+            <h4>${result.rating}</h4>
+            <h4 id="choice-dist-${result.index}"></h4>
+            <h4 id="choice-dur-${result.index}"></h4>
           </div>
-          <button class="addRestaurant" name="${name}" id="${id}">Select</button>
+          <button class="addRestaurant" name="${result.name}" id="${result.index}">Select</button>
         </div>`)
         return newChoice;
       }
-      getDistance(latitude, longitude, `choice-dist-${id}`, `choice-dur-${id}`)
+      getDistance(result.latitude, result.longitude, `choice-dist-${result.index}`, `choice-dur-${result.index}`)
     }
 
     //populate choices to choice div
@@ -88,7 +88,7 @@ function getData(index) {
           'thumbnail': results[x].thumbnail,
         }
 
-        var newOptions = new Choice(result.index, result.name, result.address,  result.locality, result.cuisines, result.latitude, result.longitude, result.rating, result.thumbnail, result.average_cost_for_two).createChoice()
+        var newOptions = new Choice(result).createChoice()
 
         $("#choice-div").append(newOptions)
       }
@@ -150,7 +150,6 @@ $("#submit-keys").on("click", function() {
   event.preventDefault();
   getLatLong(index);
 })
-
 
 
 //fill log table from firebase
@@ -247,5 +246,5 @@ database.ref("/restaurants").on("child_added", function(Snapshot) {
   </div>
 
   `)
-  displayMap(entry.latitude,entry.latitude,`map${key}`)
+  displayMap(entry.latitude,entry.longitude,`map${key}`)
 });

@@ -73,7 +73,6 @@ function getDistance(resLat,resLong,disID,durationID){
 // function to display location of restaurant on the map
 function displayMap(resLat,resLong,pId){
    $("#"+pId).append("<iframe width='250' height='250' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/view?zoom=18&center=" + resLat + "," + resLong + "&key=" + apiKey_displayMap + "' allowfullscreen></iframe>");
-   console.log("<iframe width='250' height='250' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/view?zoom=18&center=" + resLat + "," + resLong + "&key=" + apiKey_displayMap + "' allowfullscreen></iframe>")
 }
 
 // function to get Latitude and Longitude for user's location
