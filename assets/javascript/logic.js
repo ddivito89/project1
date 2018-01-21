@@ -14,7 +14,7 @@ var database = firebase.database();
 //pull data from Zomato
 function getData(index) {
   var apiKey = "2d0ccedc51dbe25f162cd3e019b158de";
-  var keyword = $("#cuisine").val();
+  var keyword = $("#cuisine").val().replace(/\s+/g, '%20').toLowerCase();
   var lat = userLatitude;
   var lon = userLongitude;
 
@@ -27,11 +27,6 @@ function getData(index) {
   $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 
     var results = []
-
-
-    console.log(response);
-    var rd = getDistance(response.restaurants[0].restaurant.location.latitude, response.restaurants[0].restaurant.location.longitude);
-    console.log(rd);
 
     //populate reuslts into an array
     for (var x = 0; x < response.restaurants.length; x++) {
@@ -54,22 +49,24 @@ function getData(index) {
     }
 
     //choice constructor
-    var Choice = function(id, name, address, locality, cuisines, latitude, longitude, rating, thumbnail, average_cost_for_two, menu_link, zomato_link) {
+    var Choice = function(result) {
       this.createChoice = function() {
-        if (thumbnail===""){
-          thumbnail ='assets/images/fork.png'
+        if (result.thumbnail===""){
+          result.thumbnail ='assets/images/fork.png'
         }
         var newChoice = (`
-        <div class = "col-md-4 addRestaurant" > <img src="${thumbnail}">
+        <div class = "col-md-4 addRestaurant" > <img src="${result.thumbnail}">
           <div class="result-text">
-            <h4>${name}</h4>
-            <h4>${rating}</h4>
-            <h4>distance</h4>
+            <h4>${result.name}</h4>
+            <h4>${result.rating}</h4>
+            <h4 id="choice-dist-${result.index}"></h4>
+            <h4 id="choice-dur-${result.index}"></h4>
           </div>
-          <button class="addRestaurant" name="${name}" id="${id}">Select</button>
+          <button class="addRestaurant" name="${result.name}" id="${result.index}">Select</button>
         </div>`)
         return newChoice;
       }
+      getDistance(result.latitude, result.longitude, `choice-dist-${result.index}`, `choice-dur-${result.index}`)
     }
 
     //populate choices to choice div
@@ -91,7 +88,7 @@ function getData(index) {
           'thumbnail': results[x].thumbnail,
         }
 
-        var newOptions = new Choice(result.index, result.name, result.address,  result.locality, result.cuisines, result.latitude, result.longitude, result.rating, result.thumbnail, result.average_cost_for_two).createChoice()
+        var newOptions = new Choice(result).createChoice()
 
         $("#choice-div").append(newOptions)
       }
@@ -112,7 +109,7 @@ function getData(index) {
         var name = results[index].name
         var address = results[index].address
         var locality = results[index].locality
-        var cuisines = results[index].name
+        var cuisines = results[index].cuisines
         var latitude = results[index].latitude
         var longitude = results[index].longitude
         var rating = results[index].rating
@@ -155,14 +152,14 @@ $("#submit-keys").on("click", function() {
 })
 
 
-
 //fill log table from firebase
 database.ref("/restaurants").on("child_added", function(Snapshot) {
 
   var entry = Snapshot.val()
+  var key = Snapshot.getRef().key
 
   $("#choice-log").prepend(`
-    <div class="row heading">
+    <div class="row heading" id="${key}">
       <div class="col-md-12">
         <h3>${entry.name}</h3>
       </div>
@@ -186,8 +183,7 @@ database.ref("/restaurants").on("child_added", function(Snapshot) {
 
       <!-- Map -->
       <div class="col-md-6">
-        <div class="col-md-6 chosen-map">
-          <img src="assets/images/map-of-middle-earth-small.png" alt="map">
+        <div class="col-md-6 chosen-map" id="map${key}">
         </div>
         <div class="col-md-6 chosen-address">
           <p class="address">${entry.address}</p>
@@ -195,5 +191,60 @@ database.ref("/restaurants").on("child_added", function(Snapshot) {
         </div>
       </div>
     </div>
+
+    <!-- Display user review -->
+  		<div class="row review">
+  			<ul class="list-group">
+  				<li class="list-group-item list-group-item-warning">
+
+  				</li>
+  			</ul>
+  		</div>
+
+  	<!-- Enter user-specific review info -->
+  	<div class="dropdown input-review">
+  		<!-- Dropdown button and toggle -->
+
+  		<button class="btn btn-info btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+
+  		Add Review
+  		<span class="caret"></span>
+  		</button>
+  		<!-- Input fields -->
+
+  		<form class='form-inline dropdown-menu' onsubmit='addReview(this)'>
+  			<!-- Rating -->
+  			<div class='form-group'>
+  				<label for="input-rating">Rating</label><br>
+  				<input id='input-rating' type='text' name='rating' required pattern='[1-7]' placeholder='1 - 7'>
+  			</div>
+  			<!-- Date of review -->
+  			<div class='form-group'>
+  				<label for="input-date">Date</label><br>
+
+  				<input id='input-date' type='date' name='date' required placeholder='mm/dd/yyyy'>
+  			</div>
+  			<!-- 3 short descriptions -->
+  			<div class='form-group'>
+  				<label for="input-date">Description 1</label><br>
+
+  				<input id='input-description-1' type='text' name='description1' required placeholder='description' maxlength='14'>
+  			</div>
+  			<div class='form-group'>
+  				<label for="input-date">2</label><br>
+  				<input id='input-description-2' type='text' name='description2' placeholder='description' maxlength='14'>
+  			</div>
+  			<div class='form-group'>
+  				<label for="input-date">3</label><br>
+  				<input id='input-description-3' type='text' name='description3' placeholder='description' maxlength='14'>
+  			</div>
+  			<div class='form-group'>
+  				<input id='submit-review' class='btn btn-primary' type='submit'>
+  			</div>
+  		</form>
+  	</div>
+  </div>
+
   `)
+  displayMap(entry.latitude,entry.longitude,`map${key}`)
 });
