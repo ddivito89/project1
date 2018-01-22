@@ -17,9 +17,10 @@
 	<title>Document</title>
 </head>
 <body>
-	<header class="jumbotron">
-		<h1>This is our project</h1>
-		<small>There are many like it but this one is ours</small>
+	<header class="page-header">
+		<h1>This is our project
+			<small>...¯\_(ツ)_/¯</small>
+		</h1>
 	</header>
 
 <!-- Input fields for searching restaurants -->
@@ -39,9 +40,7 @@
 
 <!-- Display results of search so user can choose between 3 options -->
 <div class="container results">
-	<div class="row"  id="choice-div">
-
-	</div>
+	<div class="row"  id="choice-div"></div>
 </div>
 
 <!-- Container for holding all restaurant info -->
@@ -61,4 +60,6 @@
 <script src="assets/javascript/googlemapsapi.js"></script>
 <script src="assets/javascript/addReview.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8eHV_yIjBd1ybGPr4cEVJC4YkL3yP7Sk&callback=initMap"></script>
+<!-- Script to hide results element on page load -->
+<script type="text/javascript">$('.results').hide();</script>
 </html>

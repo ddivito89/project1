@@ -55,15 +55,19 @@ function getData(index) {
           result.thumbnail ='assets/images/fork.png'
         }
         var newChoice = (`
-        <div class = "col-md-4 addRestaurant" > <img src="${result.thumbnail}">
-          <div class="result-text">
-            <h4>${result.name}</h4>
-            <h4>${result.rating}</h4>
-            <h4 id="choice-dist-${result.index}"></h4>
-            <h4 id="choice-dur-${result.index}"></h4>
+          <div class = "col-md-4 addRestaurant" > <img src="${result.thumbnail}">
+            <div class='result-info'>
+              <div class="result-text">
+                <h4>${result.name}</h4>
+                <h4>Rating: ${result.rating}</h4>
+                <h4 id="choice-dist-${result.index}"></h4>
+                <h4 id="choice-dur-${result.index}"></h4>
+              </div>
+            </div>
+            <button type='button' class='btn btn-success addRestaurant' name="${result.name}" id="${result.index}">Select</button>
           </div>
-          <button class="addRestaurant" name="${result.name}" id="${result.index}">Select</button>
-        </div>`)
+        `)
+        $('.results').show()
         return newChoice;
       }
       getDistance(result.latitude, result.longitude, `choice-dist-${result.index}`, `choice-dur-${result.index}`)
@@ -95,7 +99,9 @@ function getData(index) {
 
 
       if (index + 3 < results.length){
-        $("#choice-div").append(`<button startIndex="${x}" class="next-options">Next Options</button>`)
+        $('.next-options').remove();
+        var nextOptions = $('<button>').addClass('btn btn-primary next-options').attr('startIndex', x).text('Next Options');
+        nextOptions.insertAfter("#choice-div");
       }
 
 
@@ -155,96 +161,96 @@ $("#submit-keys").on("click", function() {
 //fill log table from firebase
 database.ref("/restaurants").on("child_added", function(Snapshot) {
 
-  var entry = Snapshot.val()
-  var key = Snapshot.getRef().key
-
-  $("#choice-log").prepend(`
-    <div class="row heading" id="${key}">
-      <div class="col-md-12">
-        <h3>${entry.name}</h3>
+  var entry = Snapshot.val();
+  var key = Snapshot.getRef().key;
+  var html = $('<div>').addClass('container restaurant-block').attr('id', 'choice-log').html(`
+      <div class="row heading" id="${key}">
+        <div class="col-md-12">
+          <h3>${entry.name}</h3>
+        </div>
       </div>
-    </div>
-    <div class="row information">
-      <div class="col-md-6">
-        <div class="row">
-          <!-- Thumbnail -->
-          <div class="col-md-6 chosen-thumbnail">
-            <img src="${entry.thumbnail}" alt="restaurant picture">
+      <div class="row information">
+        <div class="col-md-6">
+          <div class="row">
+            <!-- Thumbnail -->
+            <div class="col-md-6 chosen-thumbnail">
+              <img src="${entry.thumbnail}" alt="restaurant picture">
+            </div>
+            <!-- Text info -->
+            <div class="col-md-6 chosen-info">
+              <h4>Cuisines: ${entry.cuisines}</h4>
+              <h4>Average cost for two: $${entry.average_cost_for_two}</h4>
+              <a href=${entry.menu_link} target='_blank'>Menu</a><br>
+              <a href=${entry.zomato_link} target='_blank'>Zomato page</a>
+            </div>
           </div>
-          <!-- Text info -->
-          <div class="col-md-6 chosen-info">
-            <h4>cuisines: ${entry.cuisines}</h4>
-            <h4>average_cost_for_two: ${entry.average_cost_for_two}</h4>
-            <a href=${entry.menu_link}>Menu</a>
-            <a href=${entry.zomato_link} target='_blank'>Link</a>
+        </div>
+
+        <!-- Map -->
+        <div class="col-md-6">
+          <div class="col-md-6 chosen-map" id="map${key}">
+          </div>
+          <div class="col-md-6 chosen-address">
+            <p class="address">${entry.address}</p>
+            <p class="locality">${entry.locality}</p>
           </div>
         </div>
       </div>
 
-      <!-- Map -->
-      <div class="col-md-6">
-        <div class="col-md-6 chosen-map" id="map${key}">
-        </div>
-        <div class="col-md-6 chosen-address">
-          <p class="address">${entry.address}</p>
-          <p class="locality">${entry.locality}</p>
-        </div>
-      </div>
-    </div>
+      <!-- Display user review -->
+    		<div class="row review">
+    			<ul class="list-group">
+    				<li class="list-group-item list-group-item-warning">
 
-    <!-- Display user review -->
-  		<div class="row review">
-  			<ul class="list-group">
-  				<li class="list-group-item list-group-item-warning">
+    				</li>
+    			</ul>
+    		</div>
 
-  				</li>
-  			</ul>
-  		</div>
+    	<!-- Enter user-specific review info -->
+    	<div class="dropdown input-review">
+    		<!-- Dropdown button and toggle -->
 
-  	<!-- Enter user-specific review info -->
-  	<div class="dropdown input-review">
-  		<!-- Dropdown button and toggle -->
+    		<button class="btn btn-info btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 
-  		<button class="btn btn-info btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    		Add Review
+    		<span class="caret"></span>
+    		</button>
+    		<!-- Input fields -->
 
-  		Add Review
-  		<span class="caret"></span>
-  		</button>
-  		<!-- Input fields -->
+    		<form class='form-inline dropdown-menu' onsubmit='addReview(this)'>
+    			<!-- Rating -->
+    			<div class='form-group'>
+    				<label for="input-rating">Rating</label><br>
+    				<input id='input-rating' type='text' name='rating' required pattern='[1-3]' placeholder='1 - 3'>
+    			</div>
+    			<!-- Date of review -->
+    			<div class='form-group'>
+    				<label for="input-date">Date</label><br>
 
-  		<form class='form-inline dropdown-menu' onsubmit='addReview(this)'>
-  			<!-- Rating -->
-  			<div class='form-group'>
-  				<label for="input-rating">Rating</label><br>
-  				<input id='input-rating' type='text' name='rating' required pattern='[1-7]' placeholder='1 - 7'>
-  			</div>
-  			<!-- Date of review -->
-  			<div class='form-group'>
-  				<label for="input-date">Date</label><br>
+    				<input id='input-date' type='date' name='date' required placeholder='mm/dd/yyyy'>
+    			</div>
+    			<!-- 3 short descriptions -->
+    			<div class='form-group'>
+    				<label for="input-date">Description 1</label><br>
 
-  				<input id='input-date' type='date' name='date' required placeholder='mm/dd/yyyy'>
-  			</div>
-  			<!-- 3 short descriptions -->
-  			<div class='form-group'>
-  				<label for="input-date">Description 1</label><br>
+    				<input id='input-description-1' type='text' name='description1' required placeholder='description' maxlength='14'>
+    			</div>
+    			<div class='form-group'>
+    				<label for="input-date">2</label><br>
+    				<input id='input-description-2' type='text' name='description2' placeholder='description' maxlength='14'>
+    			</div>
+    			<div class='form-group'>
+    				<label for="input-date">3</label><br>
+    				<input id='input-description-3' type='text' name='description3' placeholder='description' maxlength='14'>
+    			</div>
+    			<div class='form-group'>
+    				<input id='submit-review' class='btn btn-primary' type='submit'>
+    			</div>
+    		</form>
+    	</div>
+    </div>`);
 
-  				<input id='input-description-1' type='text' name='description1' required placeholder='description' maxlength='14'>
-  			</div>
-  			<div class='form-group'>
-  				<label for="input-date">2</label><br>
-  				<input id='input-description-2' type='text' name='description2' placeholder='description' maxlength='14'>
-  			</div>
-  			<div class='form-group'>
-  				<label for="input-date">3</label><br>
-  				<input id='input-description-3' type='text' name='description3' placeholder='description' maxlength='14'>
-  			</div>
-  			<div class='form-group'>
-  				<input id='submit-review' class='btn btn-primary' type='submit'>
-  			</div>
-  		</form>
-  	</div>
-  </div>
+  html.insertAfter('.results');
 
-  `)
   displayMap(entry.latitude,entry.longitude,`map${key}`)
 });
