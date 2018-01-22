@@ -16,6 +16,10 @@ body {
 /*Results Styling*/
 .results {
 	margin-top: 20px;
+	height: 400px;
+}
+.result-info {
+	height: 200px;
 }
 .results img {
 	float: left;
@@ -24,18 +28,14 @@ body {
 .results>div>div {
 	padding-top: 50px;
 }
+.addRestaurant {
+	border-left: solid 1px grey;
+	border-right: solid 1px grey;
+}
 /*End results styling*/
-.result-text>h4:nth-child(2) {
+.result-text h4 {
 	position: relative;
 	left: 20px;
-}
-.result-text>h4:nth-child(3) {
-	position: relative;
-	left: 30px;
-}
-.result-text>h4:nth-child(4) {
-	position: relative;
-	left: 40px;
 }
 /*Start restaurant info stlying*/
 .restaurant-block {

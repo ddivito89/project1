@@ -55,15 +55,19 @@ function getData(index) {
           result.thumbnail ='assets/images/fork.png'
         }
         var newChoice = (`
-        <div class = "col-md-4 addRestaurant" > <img src="${result.thumbnail}">
-          <div class="result-text">
-            <h4>${result.name}</h4>
-            <h4>${result.rating}</h4>
-            <h4 id="choice-dist-${result.index}"></h4>
-            <h4 id="choice-dur-${result.index}"></h4>
+          <div class = "col-md-4 addRestaurant" > <img src="${result.thumbnail}">
+            <div class='result-info'>
+              <div class="result-text">
+                <h4>${result.name}</h4>
+                <h4>Rating: ${result.rating}</h4>
+                <h4 id="choice-dist-${result.index}"></h4>
+                <h4 id="choice-dur-${result.index}"></h4>
+              </div>
+            </div>
+            <button type='button' class='btn btn-success addRestaurant' name="${result.name}" id="${result.index}">Select</button>
           </div>
-          <button class="addRestaurant" name="${result.name}" id="${result.index}">Select</button>
-        </div>`)
+        `)
+        $('.results').show()
         return newChoice;
       }
       getDistance(result.latitude, result.longitude, `choice-dist-${result.index}`, `choice-dur-${result.index}`)
@@ -95,7 +99,7 @@ function getData(index) {
 
 
       if (index + 3 < results.length){
-        $("#choice-div").append(`<button startIndex="${x}" class="next-options">Next Options</button>`)
+        $("#choice-div").append(`<button startIndex="${x}" class="btn btn-primary next-options">Next Options</button>`)
       }
 
 
