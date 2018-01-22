@@ -174,8 +174,8 @@ database.ref("/restaurants").on("child_added", function(Snapshot) {
             <div class="col-md-6 chosen-info">
               <h4>Cuisines: ${entry.cuisines}</h4>
               <h4>Average cost for two: $${entry.average_cost_for_two}</h4>
-              <a href=${entry.menu_link}>Menu</a><br>
-              <a href=${entry.zomato_link} target='_blank'>Link</a>
+              <a href=${entry.menu_link} target='_blank'>Menu</a><br>
+              <a href=${entry.zomato_link} target='_blank'>Zomato page</a>
             </div>
           </div>
         </div>
@@ -215,7 +215,7 @@ database.ref("/restaurants").on("child_added", function(Snapshot) {
     			<!-- Rating -->
     			<div class='form-group'>
     				<label for="input-rating">Rating</label><br>
-    				<input id='input-rating' type='text' name='rating' required pattern='[1-7]' placeholder='1 - 7'>
+    				<input id='input-rating' type='text' name='rating' required pattern='[1-3]' placeholder='1 - 3'>
     			</div>
     			<!-- Date of review -->
     			<div class='form-group'>

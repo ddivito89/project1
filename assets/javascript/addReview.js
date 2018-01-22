@@ -21,30 +21,36 @@ function addReview(form) {
 
 	//Create element
 	var newReview = $("<li>").addClass('list-group-item');
+	var image;
 	//Apply styling based on rating
-	if (rating / 7 > .66) {
+	if (rating === '3') {
 		newReview.addClass('list-group-item-success');
+		image = 'assets/images/good.jpg';
 	}
-	else if (rating / 7 > .33) {
+	else if (rating === '2') {
 		newReview.addClass('list-group-item-warning');
+		image = 'assets/images/ok.jpg'
 	}
 	else {
 		newReview.addClass('list-group-item-danger');
+		image = 'assets/images/bad.png'
 	}
 	
 	//Generate html structure
 	newReview.html(`
-		<div class="row">
+		<div class="row review-line">
 			<!-- rating -->
-			<h4 class="col-md-2">${rating} / 7</h4>
+			<div class="col-md-2">
+				<img src=${image}>
+			</div>
 			<!-- Descriptions -->
-			<div class="col-md-9">
-				<h4>${description1}</h4>
-				<h4>${description2}</h4>
-				<h4>${description3}</h4>
+			<div class="col-md-7">
+				<h4 class='badge'>${description1}</h4>
+				<h4 class='badge'>${description2}</h4>
+				<h4 class='badge'>${description3}</h4>
 			</div>
 			<!-- date of review -->
-			<h4 class="col-md-1 badge">${date}</h4>
+			<h4 class="col-md-3">${date}</h4>
 		</div>
 	`);
 
