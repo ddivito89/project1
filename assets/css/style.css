@@ -32,6 +32,9 @@ body {
 	border-left: solid 1px grey;
 	border-right: solid 1px grey;
 }
+.next-options {
+	margin-top: 10px;
+}
 /*End results styling*/
 .result-text h4 {
 	position: relative;

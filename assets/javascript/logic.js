@@ -99,7 +99,9 @@ function getData(index) {
 
 
       if (index + 3 < results.length){
-        $("#choice-div").append(`<button startIndex="${x}" class="btn btn-primary next-options">Next Options</button>`)
+        $('.next-options').remove();
+        var nextOptions = $('<button>').addClass('btn btn-primary next-options').attr('startIndex', x).text('Next Options');
+        nextOptions.insertAfter("#choice-div");
       }
 
 
