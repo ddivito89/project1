@@ -136,7 +136,7 @@ function getData(index) {
           'average_cost_for_two': average_cost_for_two,
           'menu_link': menu_link,
           'zomato_link': zomato_link});
-        $("#choice-div").empty()
+        $("#choice-div").empty();
       });
 
 
@@ -180,8 +180,8 @@ database.ref("/restaurants").on("child_added", function(Snapshot) {
             <div class="col-md-6 chosen-info">
               <h4>Cuisines: ${entry.cuisines}</h4>
               <h4>Average cost for two: $${entry.average_cost_for_two}</h4>
-              <a href=${entry.menu_link} target='_blank'>Menu</a><br>
-              <a href=${entry.zomato_link} target='_blank'>Zomato page</a>
+              <h4><a href=${entry.menu_link} target='_blank'>See menu</a></h4>
+              <h4><a href=${entry.zomato_link} target='_blank'>Visit Zomato page</a></h4>
             </div>
           </div>
         </div>
@@ -231,20 +231,20 @@ database.ref("/restaurants").on("child_added", function(Snapshot) {
     			</div>
     			<!-- 3 short descriptions -->
     			<div class='form-group'>
-    				<label for="input-date">Description 1</label><br>
+    				<label for="input-date">Enter</label><br>
 
-    				<input id='input-description-1' type='text' name='description1' required placeholder='description' maxlength='14'>
+    				<input id='input-description-1' type='text' name='description1' required placeholder="How'd it taste?" maxlength='14'>
     			</div>
     			<div class='form-group'>
-    				<label for="input-date">2</label><br>
-    				<input id='input-description-2' type='text' name='description2' placeholder='description' maxlength='14'>
+    				<label for="input-date">three</label><br>
+    				<input id='input-description-2' type='text' name='description2' required placeholder='Was the staff nice?' maxlength='14'>
     			</div>
     			<div class='form-group'>
-    				<label for="input-date">3</label><br>
-    				<input id='input-description-3' type='text' name='description3' placeholder='description' maxlength='14'>
+    				<label for="input-date">descriptions</label><br>
+    				<input id='input-description-3' type='text' name='description3' required placeholder='description' maxlength='14'>
     			</div>
     			<div class='form-group'>
-    				<input id='submit-review' class='btn btn-primary' type='submit'>
+    				<input id='submit-review' class='btn btn-info' type='submit'>
     			</div>
     		</form>
     	</div>
