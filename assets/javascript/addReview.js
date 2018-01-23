@@ -1,4 +1,4 @@
-function addReview(form) {
+function addReview(form, key) {
 	event.preventDefault();
 
 	//Get input values
@@ -25,7 +25,7 @@ function addReview(form) {
 	//Apply styling based on rating
 	if (rating === '3') {
 		newReview.addClass('list-group-item-success');
-		image = 'assets/images/good.jpg';
+		image = 'assets/images/good.png';
 	}
 	else if (rating === '2') {
 		newReview.addClass('list-group-item-warning');
@@ -55,6 +55,6 @@ function addReview(form) {
 	`);
 
 	//Add to window
-	$('.restaurant-block').find('ul').prepend(newReview);
+	$(`#${key}`).find('ul').prepend(newReview);
 ;
 }
