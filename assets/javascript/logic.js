@@ -221,7 +221,7 @@ database.ref("/restaurants").on("child_added", function(Snapshot) {
     			<!-- Rating -->
     			<div class='form-group'>
     				<label for="input-rating">Rating</label><br>
-    				<input id='input-rating' type='text' name='rating' required pattern='[1-3]' placeholder='1 - 3'>
+    				<input id='input-rating' type='text' name='rating' required pattern='[1-3]' placeholder='1(bad) - 3(good)'>
     			</div>
     			<!-- Date of review -->
     			<div class='form-group'>
@@ -241,7 +241,7 @@ database.ref("/restaurants").on("child_added", function(Snapshot) {
     			</div>
     			<div class='form-group'>
     				<label for="input-date">descriptions</label><br>
-    				<input id='input-description-3' type='text' name='description3' required placeholder='description' maxlength='14'>
+    				<input id='input-description-3' type='text' name='description3' required placeholder="How're the portions?" maxlength='14'>
     			</div>
     			<div class='form-group'>
     				<input id='submit-review' class='btn btn-info' type='submit'>
