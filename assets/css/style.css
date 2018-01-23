@@ -1,0 +1,73 @@
+body {
+	margin-bottom: 500px;
+	background-color: #e5a84f;
+}
+.page-header {
+	margin-top: 0;
+	box-sizing: border-box;
+	background-color: #fffe52;
+}
+.page-header h1 {
+	margin: 0;
+}
+.addRestaurant img {
+	border-radius: 80px 80px 80px 80px;
+}
+/*Results Styling*/
+.results {
+	margin-top: 20px;
+	height: 400px;
+}
+.result-info {
+	height: 200px;
+}
+.results img {
+	float: left;
+	width: 160px;
+}
+.results>div>div {
+	padding-top: 50px;
+}
+.addRestaurant {
+	border-left: solid 1px grey;
+	border-right: solid 1px grey;
+}
+.next-options {
+	margin-top: 10px;
+}
+/*End results styling*/
+.result-text h4 {
+	position: relative;
+	left: 20px;
+}
+/*Start restaurant info stlying*/
+.restaurant-block {
+	margin-top: 15px;
+	padding-bottom: 8px;
+	background-color: #ff000069;
+	box-shadow: 1px 1px 2px 5px;
+}
+.heading {
+
+}
+.heading h3 {
+	margin: 5px 0 17px 0;
+/*	padding: 0 0 5px 0;*/
+}
+.chosen-thumbnail>img {
+	border-radius: 100px 100px 100px 100px;
+	box-shadow: 0px 0px 10px 5px #e5a84f;
+}
+/*End` restaurant info stlying*/
+/*Start review styling*/
+.review img{
+	height:50px;
+	width:50px;
+}
+.review h4 {
+	display: inline-block;
+}
+.review li {
+	padding: 0px 15px;
+}
+/*End review styling*/

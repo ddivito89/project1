@@ -3,23 +3,63 @@
 <head>
 	<meta charset="UTF-8">
 	<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 	<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<!-- Latest compiled JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="assets/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
-	  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
 
+	<!-- Custom CSS -->
+		<link rel="stylesheet" href="assets/css/style.css">
 
 	<title>Document</title>
 </head>
 <body>
 	<header class="page-header">
-		<h1>This is our project</h1>
-		<small>There are many like it but this one is ours</small>
+		<h1>This is our project
+			<small>...¯\_(ツ)_/¯</small>
+		</h1>
 	</header>
+
+<!-- Input fields for searching restaurants -->
+<div class='container questions'>
+	<form class='form-inline'>
+		<div class='form-group'>
+			<input id='cuisine' type='text' placeholder='Cuisine'>
+		</div>
+		<div class='form-group'>
+			<input id='city' type='text' placeholder='City'>
+		</div>
+	<div class='form-group'>
+			<input id='submit-keys' class='btn btn-primary' type='submit'>
+		</div>
+	</form>
+</div>
+
+<!-- Display results of search so user can choose between 3 options -->
+<div class="container results">
+	<div class="row"  id="choice-div"></div>
+</div>
+
+<!-- Container for holding all restaurant info -->
+
+<div class="container restaurant-block" id="choice-log">
+
+<!-- Display info of chosen restaurant -->
+
+</div>
+
+
+
 </body>
+
 <script src="assets/javascript/layout.js"></script>
 <script src="assets/javascript/logic.js"></script>
+<script src="assets/javascript/googlemapsapi.js"></script>
+<script src="assets/javascript/addReview.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8eHV_yIjBd1ybGPr4cEVJC4YkL3yP7Sk&callback=initMap"></script>
+<!-- Script to hide results element on page load -->
+<script type="text/javascript">$('.results').hide();</script>
 </html>
