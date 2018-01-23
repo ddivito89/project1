@@ -1,4 +1,4 @@
-function addReview(form) {
+function addReview(form, key) {
 	event.preventDefault();
 
 	//Get input values
@@ -55,6 +55,6 @@ function addReview(form) {
 	`);
 
 	//Add to window
-	$('.restaurant-block').find('ul').prepend(newReview);
+	$(`#${key}`).find('ul').prepend(newReview);
 ;
 }

@@ -163,7 +163,7 @@ database.ref("/restaurants").on("child_added", function(Snapshot) {
 
   var entry = Snapshot.val();
   var key = Snapshot.getRef().key;
-  var html = $('<div>').addClass('container restaurant-block').attr('id', 'choice-log').html(`
+  var html = $('<div>').addClass('container restaurant-block').attr('id', key).html(`
       <div class="row heading" id="${key}">
         <div class="col-md-12">
           <h3>${entry.name}</h3>
@@ -217,7 +217,7 @@ database.ref("/restaurants").on("child_added", function(Snapshot) {
     		</button>
     		<!-- Input fields -->
 
-    		<form class='form-inline dropdown-menu' onsubmit='addReview(this)'>
+    		<form class='form-inline dropdown-menu' onsubmit='addReview(this,"${key}")'>
     			<!-- Rating -->
     			<div class='form-group'>
     				<label for="input-rating">Rating</label><br>
