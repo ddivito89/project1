@@ -20,6 +20,21 @@ function addReview(form, key) {
 	$('.input-review').removeClass('open');
 
 	//Create element
+
+
+	database.ref(`/reviews`).push({
+		'restaurantKey': key,
+		'description1':description1,
+		'description2':description2,
+		'description3':description3,
+		'date':date,
+		'rating':rating
+	});
+
+}
+
+function reviewToPage(key, rating, description1, description2, description3, date){
+	
 	var newReview = $("<li>").addClass('list-group-item');
 	var image;
 	//Apply styling based on rating
@@ -35,8 +50,7 @@ function addReview(form, key) {
 		newReview.addClass('list-group-item-danger');
 		image = 'assets/images/bad.png'
 	}
-	
-	//Generate html structure
+
 	newReview.html(`
 		<div class="row review-line">
 			<!-- rating -->
@@ -56,5 +70,13 @@ function addReview(form, key) {
 
 	//Add to window
 	$(`#${key}`).find('ul').prepend(newReview);
-;
 }
+//Generate html structure
+
+
+database.ref("/reviews").on("child_added", function(Snapshot) {
+
+	var review = Snapshot.val();
+
+	reviewToPage(review.restaurantKey, review.rating, review.description1, review.description2, review.description3, review.date)
+});
