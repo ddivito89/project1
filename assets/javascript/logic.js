@@ -67,7 +67,7 @@ function getData(index) {
             <button type='button' class='btn btn-success addRestaurant' name="${result.name}" id="${result.index}">Select</button>
           </div>
         `)
-        $('.results').show()
+        
         return newChoice;
       }
       getDistance(result.latitude, result.longitude, `choice-dist-${result.index}`, `choice-dur-${result.index}`)
@@ -96,7 +96,8 @@ function getData(index) {
 
         $("#choice-div").append(newOptions)
       }
-
+      //Show results element
+      $('.results').show()
 
       if (index + 3 < results.length){
         $('.next-options').remove();
@@ -137,6 +138,7 @@ function getData(index) {
           'menu_link': menu_link,
           'zomato_link': zomato_link});
         $("#choice-div").empty();
+        $('.results').hide();
       });
 
 
