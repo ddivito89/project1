@@ -34,21 +34,21 @@ function addReview(form, key) {
 }
 
 function reviewToPage(key, rating, description1, description2, description3, date){
-	
+
 	var newReview = $("<li>").addClass('list-group-item');
 	var image;
 	//Apply styling based on rating
 	if (rating === '3') {
 		newReview.addClass('list-group-item-success');
-		image = 'assets/images/good.png';
+		image = 'assets/Images/good.png';
 	}
 	else if (rating === '2') {
 		newReview.addClass('list-group-item-warning');
-		image = 'assets/images/ok.jpg'
+		image = 'assets/Images/ok.jpg'
 	}
 	else {
 		newReview.addClass('list-group-item-danger');
-		image = 'assets/images/bad.png'
+		image = 'assets/Images/bad.png'
 	}
 
 	newReview.html(`

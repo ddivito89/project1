@@ -31,6 +31,16 @@ function getData(index) {
     //populate reuslts into an array
     for (var x = 0; x < response.restaurants.length; x++) {
 
+      function defaultImg(img){
+        if (img===""){
+          thumbnail = 'assets/Images/fork.png'
+        }else {
+          thumbnail = img
+        }
+        return thumbnail
+      }
+
+
       var result = {
         'x': x,
         'name': response.restaurants[x].restaurant.name,
@@ -40,7 +50,7 @@ function getData(index) {
         'latitude': response.restaurants[x].restaurant.location.latitude,
         'longitude': response.restaurants[x].restaurant.location.longitude,
         'rating': response.restaurants[x].restaurant.user_rating.aggregate_rating,
-        'thumbnail': response.restaurants[x].restaurant.thumb,
+        'thumbnail': defaultImg(response.restaurants[x].restaurant.thumb),
         'average_cost_for_two': response.restaurants[x].restaurant.average_cost_for_two,
         'menu_link': response.restaurants[x].restaurant.menu_url,
         'zomato_link': response.restaurants[x].restaurant.url
@@ -51,9 +61,7 @@ function getData(index) {
     //choice constructor
     var Choice = function(result) {
       this.createChoice = function() {
-        if (result.thumbnail===""){
-          result.thumbnail ='assets/images/fork.png'
-        }
+
         var newChoice = (`
           <div class = "col-md-4 addRestaurant" > <img src="${result.thumbnail}">
             <div class='result-info'>
@@ -67,7 +75,7 @@ function getData(index) {
             <button type='button' class='btn btn-success addRestaurant' name="${result.name}" id="${result.index}">Select</button>
           </div>
         `)
-        $('.results').show()
+
         return newChoice;
       }
       getDistance(result.latitude, result.longitude, `choice-dist-${result.index}`, `choice-dur-${result.index}`)
@@ -96,7 +104,8 @@ function getData(index) {
 
         $("#choice-div").append(newOptions)
       }
-
+      //Show results element
+      $('.results').show()
 
       if (index + 3 < results.length){
         $('.next-options').remove();
@@ -137,6 +146,7 @@ function getData(index) {
           'menu_link': menu_link,
           'zomato_link': zomato_link});
         $("#choice-div").empty();
+        $('.results').hide();
       });
 
 
