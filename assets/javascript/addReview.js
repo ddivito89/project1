@@ -54,17 +54,17 @@ function reviewToPage(key, rating, description1, description2, description3, dat
 	newReview.html(`
 		<div class="row review-line">
 			<!-- rating -->
-			<div class="col-md-2">
+			<div class="col-md-1">
 				<img src=${image}>
 			</div>
+			<!-- date of review -->
+			<h4 class="col-md-3">${date}</h4>
 			<!-- Descriptions -->
-			<div class="col-md-7">
+			<div class="col-md-8">
 				<h4 class='badge'>${description1}</h4>
 				<h4 class='badge'>${description2}</h4>
 				<h4 class='badge'>${description3}</h4>
 			</div>
-			<!-- date of review -->
-			<h4 class="col-md-3">${date}</h4>
 		</div>
 	`);
 

@@ -95,6 +95,11 @@ body {
 	padding-right: 10px;
 }
 h4.badge {
+	font-size: 30px;
 	margin-left: 50px;
+	margin-top: 6px;
+	margin-bottom: 0;
+	padding-left: 3px;
+	padding-right: 3px;
 }
 /*End review styling*/
