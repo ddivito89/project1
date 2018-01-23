@@ -33,9 +33,10 @@ function addReview(form, key) {
 
 }
 
-function reviewToPage(key, rating, description1, description2, description3, date){
+function reviewToPage(restaurantKey, key, rating, description1, description2, description3, date){
 
 	var newReview = $("<li>").addClass('list-group-item');
+	newReview.attr('id',key)
 	var image;
 	//Apply styling based on rating
 	if (rating === '3') {
@@ -65,11 +66,12 @@ function reviewToPage(key, rating, description1, description2, description3, dat
 				<h4 class='badge'>${description2}</h4>
 				<h4 class='badge'>${description3}</h4>
 			</div>
+			<button onclick='deleteReview(this,"${key}")'>X</button>
 		</div>
 	`);
 
 	//Add to window
-	$(`#${key}`).find('ul').prepend(newReview);
+	$(`#${restaurantKey}`).find('ul').prepend(newReview);
 }
 //Generate html structure
 
@@ -77,6 +79,27 @@ function reviewToPage(key, rating, description1, description2, description3, dat
 database.ref("/reviews").on("child_added", function(Snapshot) {
 
 	var review = Snapshot.val();
+	var key = Snapshot.getRef().key;
 
-	reviewToPage(review.restaurantKey, review.rating, review.description1, review.description2, review.description3, review.date)
+	reviewToPage(review.restaurantKey, key, review.rating, review.description1, review.description2, review.description3, review.date)
 });
+
+database.ref("/reviews").on("child_removed", function(oldChildSnapshot) {
+
+	var review = oldChildSnapshot.val();
+	var key = oldChildSnapshot.getRef().key;
+
+	$(`#${key}`).remove()
+
+	console.log(key)
+});
+
+function deleteRestaurant(form, key) {
+	event.preventDefault();
+	database.ref("/restaurants").child(key).remove()
+}
+
+function deleteReview(form, key) {
+	event.preventDefault();
+	database.ref("/reviews").child(key).remove()
+}
