@@ -1,4 +1,4 @@
-function addReview(form) {
+function addReview(form, key) {
 	event.preventDefault();
 
 	//Get input values
@@ -20,12 +20,27 @@ function addReview(form) {
 	$('.input-review').removeClass('open');
 
 	//Create element
+
+
+	database.ref(`/reviews`).push({
+		'restaurantKey': key,
+		'description1':description1,
+		'description2':description2,
+		'description3':description3,
+		'date':date,
+		'rating':rating
+	});
+
+}
+
+function reviewToPage(key, rating, description1, description2, description3, date){
+	
 	var newReview = $("<li>").addClass('list-group-item');
 	var image;
 	//Apply styling based on rating
 	if (rating === '3') {
 		newReview.addClass('list-group-item-success');
-		image = 'assets/images/good.jpg';
+		image = 'assets/images/good.png';
 	}
 	else if (rating === '2') {
 		newReview.addClass('list-group-item-warning');
@@ -35,26 +50,33 @@ function addReview(form) {
 		newReview.addClass('list-group-item-danger');
 		image = 'assets/images/bad.png'
 	}
-	
-	//Generate html structure
+
 	newReview.html(`
 		<div class="row review-line">
 			<!-- rating -->
-			<div class="col-md-2">
+			<div class="col-md-1">
 				<img src=${image}>
 			</div>
+			<!-- date of review -->
+			<h4 class="col-md-3">${date}</h4>
 			<!-- Descriptions -->
-			<div class="col-md-7">
+			<div class="col-md-8">
 				<h4 class='badge'>${description1}</h4>
 				<h4 class='badge'>${description2}</h4>
 				<h4 class='badge'>${description3}</h4>
 			</div>
-			<!-- date of review -->
-			<h4 class="col-md-3">${date}</h4>
 		</div>
 	`);
 
 	//Add to window
-	$('.restaurant-block').find('ul').prepend(newReview);
-;
+	$(`#${key}`).find('ul').prepend(newReview);
 }
+//Generate html structure
+
+
+database.ref("/reviews").on("child_added", function(Snapshot) {
+
+	var review = Snapshot.val();
+
+	reviewToPage(review.restaurantKey, review.rating, review.description1, review.description2, review.description3, review.date)
+});
