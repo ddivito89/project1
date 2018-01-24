@@ -5,8 +5,6 @@ function addReview(form, key) {
 	var rating 			= form.rating.value;
 	var date 			= form.date.value;
 	var description1 	= form.description1.value;
-	var description2 	= form.description2.value;
-	var description3 	= form.description3.value;
 
 	//Clear onput fields
 	$("#input-rating").val("");
@@ -25,8 +23,6 @@ function addReview(form, key) {
 	database.ref(`/reviews`).push({
 		'restaurantKey': key,
 		'description1':description1,
-		'description2':description2,
-		'description3':description3,
 		'date':date,
 		'rating':rating
 	});
@@ -59,14 +55,12 @@ function reviewToPage(restaurantKey, key, rating, description1, description2, de
 				<img src=${image}>
 			</div>
 			<!-- date of review -->
-			<h4 class="col-md-3">${date}</h4>
+			<h4 class="col-md-2">${date}</h4>
 			<!-- Descriptions -->
-			<div class="col-md-8">
+			<div class="col-md-9">
 				<h4 class='badge'>${description1}</h4>
-				<h4 class='badge'>${description2}</h4>
-				<h4 class='badge'>${description3}</h4>
+				<button class='btn btn-warning btn-xs delete-review-button' onclick='deleteReview(this,"${key}")'>X</button>
 			</div>
-			<button onclick='deleteReview(this,"${key}")'>X</button>
 		</div>
 	`);
 
