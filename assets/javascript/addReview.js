@@ -6,6 +6,10 @@ function addReview(form, key) {
 	var date 			= form.date.value;
 	var description1 	= form.description1.value;
 
+	var convertedDate = moment(date, "YYYY-MM-DD");
+	date = convertedDate.format("MM/DD/YYYY")
+
+
 	//Clear onput fields
 	$("#input-rating").val("");
 	$("#input-date").val("");
@@ -85,7 +89,7 @@ database.ref("/reviews").on("child_removed", function(oldChildSnapshot) {
 
 	$(`#${key}`).remove()
 
-	console.log(key)
+
 });
 
 function deleteRestaurant(form, key) {
