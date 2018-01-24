@@ -21,9 +21,6 @@ function getData(index) {
   var queryURL = "https://developers.zomato.com/api/v2.1/search?q=" + keyword + "&lat=" + lat + "&lon=" + lon +
   "&sort=real_distance&order=desc%20Response%20Body" + "&apikey=" + apiKey;
 
-
-  console.log(queryURL)
-
   $.ajax({url: queryURL, method: 'GET'}).done(function(response) {
 
     var results = []
@@ -264,5 +261,4 @@ database.ref("/restaurants").on("child_removed", function(oldChildSnapshot) {
 
 	$(`#${key}`).remove()
 
-	console.log(key)
 });
