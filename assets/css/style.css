@@ -104,3 +104,9 @@ h4.badge {
 	padding-right: 3px;
 }
 /*End review styling*/
+.delete-restaurant-button, .delete-review-button {
+	float: right;
+}
+.delete-review-button {
+	margin-top: 16px;
+}

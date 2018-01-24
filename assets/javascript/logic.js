@@ -257,7 +257,7 @@ database.ref("/restaurants").on("child_added", function(Snapshot) {
     				<input id='submit-review' class='btn btn-info' type='submit'>
     			</div>
     		</form>
-        <button onclick='deleteRestaurant(this,"${key}")'>X</button>
+        <button class='btn btn-warning btn-xs delete-restaurant-button' onclick='deleteRestaurant(this,"${key}")'>X</button>
     	</div>
     </div>`);
 

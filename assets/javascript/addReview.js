@@ -65,8 +65,8 @@ function reviewToPage(restaurantKey, key, rating, description1, description2, de
 				<h4 class='badge'>${description1}</h4>
 				<h4 class='badge'>${description2}</h4>
 				<h4 class='badge'>${description3}</h4>
+				<button class='btn btn-warning btn-xs delete-review-button' onclick='deleteReview(this,"${key}")'>X</button>
 			</div>
-			<button onclick='deleteReview(this,"${key}")'>X</button>
 		</div>
 	`);
 
