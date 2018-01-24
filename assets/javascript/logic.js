@@ -239,19 +239,10 @@ database.ref("/restaurants").on("child_added", function(Snapshot) {
 
     				<input id='input-date' type='date' name='date' required placeholder='mm/dd/yyyy'>
     			</div>
-    			<!-- 3 short descriptions -->
+    			<!-- 1 short description -->
     			<div class='form-group'>
-    				<label for="input-date">Enter</label><br>
-
-    				<input id='input-description-1' type='text' name='description1' required placeholder="How'd it taste?" maxlength='14'>
-    			</div>
-    			<div class='form-group'>
-    				<label for="input-date">three</label><br>
-    				<input id='input-description-2' type='text' name='description2' required placeholder='Was the staff nice?' maxlength='14'>
-    			</div>
-    			<div class='form-group'>
-    				<label for="input-date">descriptions</label><br>
-    				<input id='input-description-3' type='text' name='description3' required placeholder="How're the portions?" maxlength='14'>
+    				<label for="input-description-1">Review</label><br>
+    				<input id='input-description-1' type='text' name='description1' required placeholder="How was it?" maxlength='27'>
     			</div>
     			<div class='form-group'>
     				<input id='submit-review' class='btn btn-info' type='submit'>
